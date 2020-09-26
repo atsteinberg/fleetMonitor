@@ -1,38 +1,38 @@
 import { useTable } from 'react-table';
 import React from 'react';
+import { useSelector, useDispatch } from "react-redux";
  
  function ShipTable() {
-   const data = React.useMemo(
-     () => [
-       {
-         col1: 'BBC Singapore',
-         col2: '43234324324',
-       },
-       {
-         col1: 'BBC Nile',
-         col2: '342343',
-       },
-       {
-         col1: 'BBC Ocean',
-         col2: '432432',
-       },
-     ],
-     []
-   )
- 
-   const columns = React.useMemo(
-     () => [
-       {
-         Header: 'Ship Name',
-         accessor: 'col1', // accessor is the "key" in the data
-       },
-       {
-         Header: 'IMO #',
-         accessor: 'col2',
-       },
-     ],
-     []
-   )
+
+  
+  const columns = React.useMemo(()=> [
+    {
+      Header: 'Ship Name' ,
+      accessor: 'shipName', // accessor is the "key" in the data
+    },
+    {
+      Header: 'MMSI #',
+      accessor: 'mmsi',
+    },
+    {
+      Header: 'Type',
+      accessor: 'type',
+    },
+    {
+      Header: 'Owner',
+      accessor: 'owner',
+    },
+  ]);
+  
+  const shipData = useSelector(function(state) {
+    console.log(state);
+    return state.ships;
+  });
+
+  const data=React.useMemo(()=>shipData,[]);
+
+   
+  const dispatch = useDispatch();
  
    const {
      getTableProps,
