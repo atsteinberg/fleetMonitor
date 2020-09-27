@@ -5,30 +5,9 @@ import shipIcon from './icons8-cargo-ship-100.png';
 
 
 
-
-// eslint-disable-next-line
-  const locations = {
-    operaHouse: { lat: -33.8567844, lng: 151.213108 },
-    tarongaZoo: { lat: -33.8472767, lng: 151.2188164 },
-    manlyBeach: { lat: -33.8209738, lng: 151.2563253 },
-    hyderPark: { lat: -33.8690081, lng: 151.2052393 },
-    theRocks: { lat: -33.8587568, lng: 151.2058246 },
-    circularQuay: { lat: -33.858761, lng: 151.2055688 },
-    harbourBridge: { lat: -33.852228, lng: 151.2038374 },
-    kingsCross: { lat: -33.8737375, lng: 151.222569 },
-    botanicGardens: { lat: -33.864167, lng: 151.216387 },
-    museumOfSydney: { lat: -33.8636005, lng: 151.2092542 },
-    kingStreetWharf: { lat: -33.8665445, lng: 151.1989808 },
-    aquarium: { lat: -33.869627, lng: 151.202146 },
-    darlingHarbour: { lat: -33.87488, lng: 151.1987113 },
-    barangaroo: { lat: - 33.8605523, lng: 151.1972205 }
-  }
-  
-
-
 const containerStyle = {
-  width: '800px',
-  height: '800px'
+  width: '1000px',
+  height: '1000px'
 };
 
 
@@ -86,9 +65,14 @@ function MapComponent() {
 
 
   return (
+    <div className="md:px-8 py-8 w-full">
+    <div className="shadow overflow-hidden rounded border-b border-gray-200">
+
     <LoadScript
       googleMapsApiKey="AIzaSyCAN4dvLQ5Jb5KDUFfJdf6keqtZOf7V1_Y"
     >
+    
+      
       <GoogleMap
         onLoad={(loadedMap)=>{map=loadedMap}} //eslint-disable-line no-console
         mapContainerStyle={containerStyle}
@@ -109,6 +93,8 @@ function MapComponent() {
        
       </GoogleMap>
     </LoadScript>
+</div>
+</div>
   )
 }
 
