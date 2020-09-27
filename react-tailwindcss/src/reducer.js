@@ -24,7 +24,7 @@ const initialShips = [
   {shipName: "Swenja", mmsi:211577000,type:"12500t 2x1000t 20kn", owner:"SAL",lat:54.427599,lng: 3.175018}
 ];
 
-export default function (ships = initialShips, action) {
+export default function (ships = initialShips, action="") {
   switch(action.type) {
     case "NEW":
       return {ships};
