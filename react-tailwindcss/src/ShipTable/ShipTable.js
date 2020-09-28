@@ -1,7 +1,8 @@
-import { useTable, useFilters, useGlobalFilter, useAsyncDebounce } from 'react-table'
+import { useTable, useFilters, useGlobalFilter, useAsyncDebounce,usePagination, useRowSelect } from 'react-table'
 import React from 'react';
 import { useSelector, useDispatch } from "react-redux";
  
+
 
 // Define a default UI for filtering
 function DefaultColumnFilter({
@@ -83,6 +84,16 @@ function SelectColumnFilter({
       Filter: SelectColumnFilter,
       filter: 'includes',
     },
+    {
+      Header: 'LAT',
+      accessor: 'lat',
+      
+    },
+    {
+      Header: 'LNG',
+      accessor: 'lng',
+      
+    }
   ]);
   
   const defaultColumn = React.useMemo(
@@ -142,7 +153,7 @@ function SelectColumnFilter({
 
 
   return (
-    <div className="md:px-8 py-8 w-full">
+    <div className="md:px-4 py-8 w-full">
     <div className="shadow overflow-hidden rounded border-b border-gray-200">
      <table className="min-w-full bg-white"
      {...getTableProps()} >

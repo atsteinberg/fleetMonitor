@@ -4,6 +4,7 @@ import "./style/main.css";
 import { createStore } from "redux";
 import { Provider,useSelector} from "react-redux";
 import reducer from "./reducer.js";
+import UpdateButton from "./UpdateButton/UpdateButton";
 
 import MapComponent from './MapComponent/MapComponent';
 import ShipTable from './ShipTable/ShipTable.js';
@@ -12,9 +13,9 @@ import ShipTable from './ShipTable/ShipTable.js';
 const store = createStore(reducer);
 
 
+
 function App() {
-  
-  
+   
   return (
     <div>
     <div className="p-4 m-4 bg-blue-600">
@@ -22,12 +23,14 @@ function App() {
       </div>
 
       <Provider store={store}>
-
-    <div className="flex flex-row">
-          
-        <ShipTable />
-        <MapComponent/>
-     
+      <UpdateButton/>
+    <div className="flex flex-row flex-no-wrap">
+        
+    <ShipTable />
+    <MapComponent/>
+        
+       
+    
     </div>
     </Provider>
     </div>
