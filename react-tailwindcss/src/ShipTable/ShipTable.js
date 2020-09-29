@@ -1,10 +1,11 @@
-import { useTable, useFilters, useGlobalFilter, useAsyncDebounce,usePagination, useRowSelect } from 'react-table'
+import { useTable, useFilters, useGlobalFilter } from 'react-table'
 import React from 'react';
-import { useSelector, useDispatch } from "react-redux";
- 
+import { useSelector } from "react-redux";
+import MapComponent from '../MapComponent/MapComponent';
+import UpdateButton from "./../UpdateButton/UpdateButton";
 
 
-// Define a default UI for filtering
+
 function DefaultColumnFilter({
   column: { filterValue, preFilteredRows, setFilter },
 }) {
@@ -14,19 +15,17 @@ function DefaultColumnFilter({
     <input 
       value={filterValue || ''}
       onChange={e => {
-        setFilter(e.target.value || undefined) // Set undefined to remove the filter entirely
+        setFilter(e.target.value || undefined) 
       }}
       placeholder={`Search ${count} records...`}
     />
   )
 }
-// This is a custom filter UI for selecting
-// a unique option from a list
+
 function SelectColumnFilter({
   column: { filterValue, setFilter, preFilteredRows, id },
 }) {
-  // Calculate the options for filtering
-  // using the preFilteredRows
+
   const options = React.useMemo(() => {
     const options = new Set()
     preFilteredRows.forEach(row => {
@@ -36,11 +35,12 @@ function SelectColumnFilter({
   }, [id, preFilteredRows])
 
 
-  // Render a multi-select box
+  
   return (
     <select
       value={filterValue}
       onChange={e => {
+        
         setFilter(e.target.value || undefined)
       }}
     >
@@ -54,26 +54,26 @@ function SelectColumnFilter({
   )
 }
 
-
  function ShipTable() {
 
- const data = useSelector(function(state) {
-    console.log(state);
+ const shipData = useSelector(function(state) {
     return state.ships;
   });
-  
+
+  const data=React.useMemo(()=>shipData,[shipData]);
+
 
   const columns = React.useMemo(()=> [
     {
       Header: 'Ship Name' ,
-      accessor: 'shipName', // accessor is the "key" in the data
+      accessor: 'shipName', 
     },
     {
       Header: 'MMSI #',
       accessor: 'mmsi',
     },
     {
-      Header: 'Type',
+      Header: 'Ship Type',
       accessor: 'type',
       Filter: SelectColumnFilter,
       filter: 'includes',
@@ -85,20 +85,32 @@ function SelectColumnFilter({
       filter: 'includes',
     },
     {
-      Header: 'LAT',
+      Header: 'Latitude',
       accessor: 'lat',
+      Filter: ()=><div></div>, 
+      filter: 'includes',
       
     },
     {
-      Header: 'LNG',
+      Header: 'Longitude',
       accessor: 'lng',
+      Filter:()=><div></div>,
+      filter:'includes',
+      
+    },
+    {
+      Header: 'updated',
+      accessor: 'updated',
+      Filter:()=><div></div>,
+      filter:'includes',
       
     }
-  ]);
+  ],[]);
+
   
   const defaultColumn = React.useMemo(
     () => ({
-      // Let's set up our default Filter UI
+      
       Filter: DefaultColumnFilter,
     }),
     []
@@ -106,10 +118,7 @@ function SelectColumnFilter({
 
   const filterTypes = React.useMemo(
     () => ({
-      // Add a new fuzzyTextFilterFn filter type.
-      //fuzzyText: fuzzyTextFilterFn,
-      // Or, override the default text filter to use
-      // "startWith"
+     
       text: (rows, id, filterValue) => {
         return rows.filter(row => {
           const rowValue = row.values[id]
@@ -123,41 +132,38 @@ function SelectColumnFilter({
     }),
     []
   )
-  
-  
-
-  
-  //const dispatch = useDispatch();
- 
+    
    const {
     getTableProps,
     getTableBodyProps,
     headerGroups,
     rows,
     prepareRow,
-    state,
-    visibleColumns,
-    preGlobalFilteredRows,
-    setGlobalFilter,
+    
    } = useTable(
     {
       columns,
       data,
-      defaultColumn, // Be sure to pass the defaultColumn option
+      defaultColumn, 
       filterTypes,
     },
-    useFilters, // useFilters!
-    useGlobalFilter // useGlobalFilter!
+    useFilters, 
+    useGlobalFilter 
   )
- 
-
+   
+    const mapCenter = { lat: 52.430514, lng: 4.162088 }
 
   return (
-    <div className="md:px-4 py-8 w-full">
-    <div className="shadow overflow-hidden rounded border-b border-gray-200">
-     <table className="min-w-full bg-white"
+    <div> 
+      <div className="flex-col items-center">
+        <MapComponent key={"map"} rows={rows} center={mapCenter}/>
+        <UpdateButton key={"update"} />
+      <div className="flex-grow md: px-20 py-8 w-full">
+        <div className="shadow overflow-hidden rounded border-b border-gray-200">
+     
+    <table className="min-w-full bg-white"
      {...getTableProps()} >
-       <thead className="bg-gray-800 text-white">
+        <thead className="bg-gray-800 text-white">
          {headerGroups.map(headerGroup => (
            <tr {...headerGroup.getHeaderGroupProps()}>
              {headerGroup.headers.map(column => (
@@ -185,6 +191,7 @@ function SelectColumnFilter({
                    <td className="w-1/3 text-left py-3 px-4"
                      {...cell.getCellProps()}>
                      {cell.render('Cell')}
+                     
                    </td>
                  )
                })}
@@ -193,6 +200,8 @@ function SelectColumnFilter({
          })}
        </tbody>
      </table>
+     </div>
+     </div>
      </div>
   </div>
    )
