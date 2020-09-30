@@ -12,7 +12,7 @@ function MapComponent({rows,center}) {
  
   let map;
   return (
-    <div className="md:px-20 py-8">
+    <div className="md:px-20 py-8 w-full" >
     <div className="shadow overflow-hidden rounded border-b border-gray-200">
 
     <LoadScript googleMapsApiKey={process.env.REACT_APP_API_MAPS} >
