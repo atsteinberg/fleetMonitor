@@ -154,11 +154,13 @@ function SelectColumnFilter({
     const mapCenter = { lat: 52.430514, lng: 4.162088 }
 
   return (
-    <div> 
-      <div className="flex-col items-center">
-        <MapComponent key={"map"} rows={rows} center={mapCenter}/>
-        <UpdateButton key={"update"} />
-      <div className="flex-grow md: px-20 py-8 w-full">
+    
+      <div className="flex flex-col items-center" >
+      
+      <MapComponent  key={"map"} rows={rows} center={mapCenter}/>
+      <UpdateButton  key={"update"} />
+      <div className="md: px-20 py-8 w-full">
+     
         <div className="shadow overflow-hidden rounded border-b border-gray-200">
      
     <table className="min-w-full bg-white"
@@ -203,7 +205,7 @@ function SelectColumnFilter({
      </div>
      </div>
      </div>
-  </div>
+  
    )
  }
 

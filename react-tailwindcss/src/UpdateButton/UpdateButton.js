@@ -29,9 +29,9 @@ function UpdateButton () {
   };
 
 return (
-  <div className="px-20">
+  <div>
    <button className="bg-red-500 hover:bg-red-300 text-white font-bold py-2 px-8 rounded " onClick={updatePositions}>Update Live Positions</button> 
-  </div>
+   </div>
 )
 }
 
