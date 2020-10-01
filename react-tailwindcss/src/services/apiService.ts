@@ -1,4 +1,9 @@
-export const updatePositions = function (ships, dispatch) {
+import { UpdateAction, Ships } from '../types/redux';
+
+export const updatePositions: (
+  ships: Ships,
+  dispatch: (arg0: UpdateAction) => void,
+) => void = (ships, dispatch) => {
   ships.forEach((ship, index) =>
     fetch(
       'https://services.marinetraffic.com/api/exportvessel/v:5/' +
