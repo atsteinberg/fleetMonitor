@@ -1,8 +1,8 @@
-import { useTable, useFilters, useGlobalFilter } from "react-table";
-import React from "react";
-import { useSelector } from "react-redux";
-import MapComponent from "../MapComponent/MapComponent";
-import UpdateButton from "./../UpdateButton/UpdateButton";
+import { useTable, useFilters, useGlobalFilter } from 'react-table';
+import React from 'react';
+import { useSelector } from 'react-redux';
+import MapComponent from '../MapComponent/MapComponent';
+import UpdateButton from '../UpdateButton/UpdateButton';
 
 function DefaultColumnFilter({
   column: { filterValue, preFilteredRows, setFilter },
@@ -11,7 +11,7 @@ function DefaultColumnFilter({
 
   return (
     <input
-      value={filterValue || ""}
+      value={filterValue || ''}
       onChange={(e) => {
         setFilter(e.target.value || undefined);
       }}
@@ -58,52 +58,52 @@ function ShipTable() {
   const columns = React.useMemo(
     () => [
       {
-        Header: "Ship Name",
-        accessor: "shipName",
+        Header: 'Ship Name',
+        accessor: 'shipName',
       },
       {
-        Header: "MMSI #",
-        accessor: "mmsi",
+        Header: 'MMSI #',
+        accessor: 'mmsi',
       },
       {
-        Header: "Ship Type",
-        accessor: "type",
+        Header: 'Ship Type',
+        accessor: 'type',
         Filter: SelectColumnFilter,
-        filter: "includes",
+        filter: 'includes',
       },
       {
-        Header: "Owner",
-        accessor: "owner",
+        Header: 'Owner',
+        accessor: 'owner',
         Filter: SelectColumnFilter,
-        filter: "includes",
+        filter: 'includes',
       },
       {
-        Header: "Latitude",
-        accessor: "lat",
+        Header: 'Latitude',
+        accessor: 'lat',
         Filter: () => <div></div>,
-        filter: "includes",
+        filter: 'includes',
       },
       {
-        Header: "Longitude",
-        accessor: "lng",
+        Header: 'Longitude',
+        accessor: 'lng',
         Filter: () => <div></div>,
-        filter: "includes",
+        filter: 'includes',
       },
       {
-        Header: "updated",
-        accessor: "updated",
+        Header: 'updated',
+        accessor: 'updated',
         Filter: () => <div></div>,
-        filter: "includes",
+        filter: 'includes',
       },
     ],
-    []
+    [],
   );
 
   const defaultColumn = React.useMemo(
     () => ({
       Filter: DefaultColumnFilter,
     }),
-    []
+    [],
   );
 
   const filterTypes = React.useMemo(
@@ -119,7 +119,7 @@ function ShipTable() {
         });
       },
     }),
-    []
+    [],
   );
 
   const {
@@ -136,15 +136,15 @@ function ShipTable() {
       filterTypes,
     },
     useFilters,
-    useGlobalFilter
+    useGlobalFilter,
   );
 
   const mapCenter = { lat: 52.430514, lng: 4.162088 };
 
   return (
     <div className="flex flex-col items-center">
-      <MapComponent key={"map"} rows={rows} center={mapCenter} />
-      <UpdateButton key={"update"} />
+      <MapComponent key={'map'} rows={rows} center={mapCenter} />
+      <UpdateButton key={'update'} />
       <div className="md: px-20 py-8 w-full">
         <div className="shadow overflow-hidden rounded border-b border-gray-200">
           <table className="min-w-full bg-white" {...getTableProps()}>
@@ -156,9 +156,9 @@ function ShipTable() {
                       className="w-1/3 text-left py-3 px-4 uppercase font-semibold text-sm"
                       {...column.getHeaderProps()}
                     >
-                      {column.render("Header")}
+                      {column.render('Header')}
                       <div className="text-black">
-                        {column.canFilter ? column.render("Filter") : null}
+                        {column.canFilter ? column.render('Filter') : null}
                       </div>
                     </th>
                   ))}
@@ -177,7 +177,7 @@ function ShipTable() {
                           className="w-1/3 text-left py-3 px-4"
                           {...cell.getCellProps()}
                         >
-                          {cell.render("Cell")}
+                          {cell.render('Cell')}
                         </td>
                       );
                     })}

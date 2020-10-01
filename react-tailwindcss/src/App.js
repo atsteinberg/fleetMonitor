@@ -1,16 +1,12 @@
 import React from 'react';
 import './App.css';
-import "./style/main.css";
+import './style/main.css';
 
-
-
-import ShipTable from './ShipTable/ShipTable.js';
-
+import ShipTable from './components/ShipTable/ShipTable.js';
 
 function App() {
-   
   return (
-    <div >
+    <div>
       <div className="p-4 m-4 bg-blue-600">
         <h1 className="text-2xl font-bold text-white">Fleet Spy</h1>
       </div>
@@ -20,4 +16,3 @@ function App() {
 }
 
 export default App;
-
