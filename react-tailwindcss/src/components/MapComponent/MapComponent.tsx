@@ -27,7 +27,7 @@ function MapComponent({ rows, center }) {
                 icon={shipIcon}
                 label={ship.original.shipName}
                 position={{ lat: ship.original.lat, lng: ship.original.lng }}
-                onclick={(e) => map.panTo(e.target.position)}
+                onClick={(e) => map.panTo(e.target.position)}
               />
             ))}
           </GoogleMap>
