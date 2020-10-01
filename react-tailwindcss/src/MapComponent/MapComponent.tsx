@@ -1,16 +1,11 @@
-import React from "react";
-import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api";
-import shipIcon from "./icons8-cargo-ship-100.png";
+import React from 'react';
+import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
+import shipIcon from './icons8-cargo-ship-100.png';
 
 const containerStyle = {
-  width: "100%",
-  height: "600px",
+  width: '100%',
+  height: '600px',
 };
-
-type Props = {
-  rows: number,
-  center: number,
-}
 
 function MapComponent({ rows, center }: Props) {
   let map;
