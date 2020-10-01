@@ -1,4 +1,5 @@
-import { Ship } from './interfaces/ShipInterface';
+import { ShipsState, UpdateAction } from './types/redux';
+import { Ship } from './types/ShipInterface';
 
 const initialShips: Ship[] = [
   {
@@ -211,14 +212,8 @@ const initialShips: Ship[] = [
 ];
 
 export default function (
-  state: { ships: Ship[] } = { ships: initialShips },
-  action: {
-    type: string;
-    index: number;
-    lat: number;
-    lng: number;
-    updated: boolean;
-  },
+  state: ShipsState = { ships: initialShips },
+  action: UpdateAction,
 ): { ships: Ship[] } {
   let updatedShips;
 
