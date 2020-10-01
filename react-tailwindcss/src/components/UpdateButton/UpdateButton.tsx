@@ -1,14 +1,10 @@
 import React from 'react';
 import { updatePositions } from '../../services/apiService';
 import { useSelector, useDispatch } from 'react-redux';
-import { Ship } from '../../types/ShipInterface';
-
-type State = {
-  ships: Ship[];
-};
+import { ShipsState } from '../../types/redux';
 
 function UpdateButton() {
-  const ships = useSelector(function (state: State) {
+  const ships = useSelector(function (state: ShipsState) {
     return state.ships;
   });
   const dispatch = useDispatch();
