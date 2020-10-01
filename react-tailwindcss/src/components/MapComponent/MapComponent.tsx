@@ -7,7 +7,7 @@ const containerStyle = {
   height: '600px',
 };
 
-function MapComponent({ rows, center }: Props) {
+function MapComponent({ rows, center }) {
   let map;
   return (
     <div className="md:px-20 py-8 w-full">
