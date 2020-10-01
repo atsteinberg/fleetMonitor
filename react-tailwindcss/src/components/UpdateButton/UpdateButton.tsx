@@ -1,7 +1,7 @@
 import React from 'react';
 import { updatePositions } from '../../services/apiService';
 import { useSelector, useDispatch } from 'react-redux';
-import { Ship } from '../../interfaces/ShipInterface';
+import { Ship } from '../../types/ShipInterface';
 
 type State = {
   ships: Ship[];
