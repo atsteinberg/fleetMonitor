@@ -212,7 +212,13 @@ const initialShips: Ship[] = [
 
 export default function (
   state: { ships: Ship[] } = { ships: initialShips },
-  action: any,
+  action: {
+    type: string;
+    index: number;
+    lat: number;
+    lng: number;
+    updated: boolean;
+  },
 ): { ships: Ship[] } {
   let updatedShips;
 
