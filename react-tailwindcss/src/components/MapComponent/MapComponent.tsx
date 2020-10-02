@@ -1,7 +1,6 @@
 import React from 'react';
 import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
 import shipIcon from './icons8-cargo-ship-100.png';
-import { Ships } from '../../types/redux';
 import { Ship } from '../../types/ShipInterface';
 
 const containerStyle = {
