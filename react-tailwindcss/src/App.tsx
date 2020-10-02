@@ -1,7 +1,7 @@
 import React from 'react';
 import './style/main.css';
 
-import ShipTable from './components/ShipTable/ShipTable.js';
+import ShipTable from './components/ShipTable/ShipTable';
 
 const App: React.FC<unknown> = () => {
   return (
