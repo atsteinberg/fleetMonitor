@@ -1,4 +1,4 @@
-import { useTable, useFilters, useGlobalFilter } from 'react-table';
+import { useTable, useFilters, useGlobalFilter, Row } from 'react-table';
 import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { ShipsState } from '../../types/redux';
@@ -6,7 +6,7 @@ import { DefaultColumnFilter } from '../DefaultColumnFilter/DefaultColumnFilter'
 import { SelectColumnFilter } from '../SelectColumnFilter/SelectColumnFilter';
 
 type ShipTableProps = {
-  setRows: (rows: string[]) => void;
+  setRows;
 };
 
 const EmptyDiv: React.FC<unknown> = () => <div></div>;
@@ -29,65 +29,65 @@ function ShipTable({ setRows }: ShipTableProps) {
       {
         Header: 'Ship Type',
         accessor: 'type',
-        // Filter: SelectColumnFilter,
-        // filter: 'includes',
+        Filter: SelectColumnFilter,
+        filter: 'includes',
       },
       {
         Header: 'Owner',
         accessor: 'owner',
-        // Filter: SelectColumnFilter,
-        // filter: 'includes',
+        Filter: SelectColumnFilter,
+        filter: 'includes',
       },
       {
         Header: 'Latitude',
         accessor: 'lat',
-        // Filter: <EmptyDiv />,
-        // filter: 'includes',
+        Filter: <EmptyDiv />,
+        filter: 'includes',
       },
       {
         Header: 'Longitude',
         accessor: 'lng',
-        // Filter: <EmptyDiv />,
-        // filter: 'includes',
+        Filter: <EmptyDiv />,
+        filter: 'includes',
       },
       {
         Header: 'updated',
         accessor: 'updated',
-        // Filter: <EmptyDiv />,
-        // filter: 'includes',
+        Filter: <EmptyDiv />,
+        filter: 'includes',
       },
     ],
     [],
   );
 
-  // const defaultColumn = React.useMemo(
-  //   () => ({
-  //     Filter: DefaultColumnFilter,
-  //   }),
-  //   [],
-  // );
+  const defaultColumn = React.useMemo(
+    () => ({
+      Filter: DefaultColumnFilter,
+    }),
+    [],
+  );
 
-  // const filterTypes = React.useMemo(
-  //   () => ({
-  //     text: (rows, id, filterValue) => {
-  //       return rows.filter((row) => {
-  //         const rowValue = row.values[id];
-  //         return rowValue !== undefined
-  //           ? String(rowValue)
-  //               .toLowerCase()
-  //               .startsWith(String(filterValue).toLowerCase())
-  //           : true;
-  //       });
-  //     },
-  //   }),
-  //   [],
-  // );
+  const filterTypes = React.useMemo(
+    () => ({
+      text: (rows, id, filterValue) => {
+        return rows.filter((row) => {
+          const rowValue = row.values[id];
+          return rowValue !== undefined
+            ? String(rowValue)
+                .toLowerCase()
+                .startsWith(String(filterValue).toLowerCase())
+            : true;
+        });
+      },
+    }),
+    [],
+  );
   const tableInstance = useTable(
     {
       columns,
       data,
-      // defaultColumn,
-      // filterTypes,
+      defaultColumn,
+      filterTypes,
     },
     useFilters,
     useGlobalFilter,
@@ -165,6 +165,7 @@ function ShipTable({ setRows }: ShipTableProps) {
                   key={'header-' + column.Header}
                 >
                   {column.render('Header')}
+                  <div>{column.canFilter ? column.render('Filter') : null}</div>
                 </th>
               );
             })}
