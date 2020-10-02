@@ -1,17 +1,12 @@
 import React from 'react';
+import { FilterProps } from 'react-table';
+import { Ships } from '../../types/redux';
 
-interface DefaultColumnFilterProps {
-  filterValue: string;
-  preFilteredRows: string[];
-  setFilter: (filter: string | undefined) => void;
-}
-
-export const DefaultColumnFilter: React.FC<DefaultColumnFilterProps> = (
-  column: DefaultColumnFilterProps,
-) => {
-  const { filterValue, preFilteredRows, setFilter } = column;
-
+export function DefaultColumnFilter({
+  column: { filterValue, preFilteredRows, setFilter },
+}: FilterProps<Ships>): JSX.Element {
   const count = preFilteredRows.length;
+
   return (
     <input
       value={filterValue || ''}
@@ -21,4 +16,4 @@ export const DefaultColumnFilter: React.FC<DefaultColumnFilterProps> = (
       placeholder={`Search ${count} records...`}
     />
   );
-};
+}
