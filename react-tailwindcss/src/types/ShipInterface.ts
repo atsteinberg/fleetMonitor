@@ -5,5 +5,5 @@ export interface Ship {
   owner: string;
   lat: number;
   lng: number;
-  updated: string;
+  updated: boolean | string;
 }

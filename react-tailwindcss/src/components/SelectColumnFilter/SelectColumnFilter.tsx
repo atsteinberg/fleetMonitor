@@ -2,28 +2,6 @@ import React from 'react';
 import { FilterProps } from 'react-table';
 import { Ships } from '../../types/redux';
 
-// type Column = {
-//   filterValue: string;
-//   preFilteredRows: string[];
-//   setFilter: (filter: string | undefined) => void;
-// };
-
-// interface DefaultColumnFilterProps {
-//   column: Column;
-// }
-
-// TODO confirm actual types
-// interface ColumnProps {
-//   filterValue: string;
-//   setFilter: (input: string | undefined) => void;
-//   preFilteredRows: Record<string, unknown>[];
-//   id: string;
-// }
-
-// type ColumnObjectProps = {
-//   column: ColumnProps;
-// };
-
 export function SelectColumnFilter({
   column: { filterValue, preFilteredRows, setFilter, id },
 }: FilterProps<Ships>): JSX.Element {
@@ -45,7 +23,7 @@ export function SelectColumnFilter({
       <option value="">All</option>
       {options.map((option, i) => (
         <option key={i} value={option as string[]}>
-          {option}
+          {option as JSX.Element}
         </option>
       ))}
     </select>

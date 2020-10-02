@@ -7,8 +7,6 @@ import { Ship } from '../../types/ShipInterface';
 
 const mapCenter = { lat: 52.430514, lng: 4.162088 };
 
-// interface MainProps {}
-
 export const Main: React.FC<unknown> = ({}) => {
   const [rows, setRows] = useState<Row<Ship>[]>([]);
   return (

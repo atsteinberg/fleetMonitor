@@ -1,7 +1,6 @@
 import React from 'react';
 import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
 import shipIcon from './icons8-cargo-ship-100.png';
-import { Ships } from '../../types/redux';
 import { Ship } from '../../types/ShipInterface';
 
 const containerStyle = {
@@ -28,7 +27,7 @@ export const MapComponent: React.FC<MapComponentProps> = ({
   rows,
   center,
 }: MapComponentProps) => {
-  let map;
+  let map: google.maps.Map;
   return (
     <div className="md:px-20 py-8 w-full">
       <div className="shadow overflow-hidden rounded border-b border-gray-200">
@@ -36,6 +35,7 @@ export const MapComponent: React.FC<MapComponentProps> = ({
           <GoogleMap
             onLoad={(loadedMap) => {
               map = loadedMap;
+              console.log(map);
             }}
             mapContainerStyle={containerStyle}
             center={center}
@@ -47,7 +47,10 @@ export const MapComponent: React.FC<MapComponentProps> = ({
                 icon={shipIcon}
                 label={ship.original.shipName}
                 position={{ lat: ship.original.lat, lng: ship.original.lng }}
-                onClick={(e) => map.panTo(e.target.position)}
+                onClick={(e) => {
+                  console.log(map);
+                  map.panTo(e.latLng);
+                }}
               />
             ))}
           </GoogleMap>
