@@ -1,11 +1,5 @@
 import React from 'react';
 
-type Column = {
-  filterValue: string;
-  preFilteredRows: string[];
-  setFilter: (filter: string | undefined) => void;
-};
-
 interface DefaultColumnFilterProps {
   filterValue: string;
   preFilteredRows: string[];
@@ -13,7 +7,7 @@ interface DefaultColumnFilterProps {
 }
 
 export const DefaultColumnFilter: React.FC<DefaultColumnFilterProps> = (
-  column: Column,
+  column: DefaultColumnFilterProps,
 ) => {
   const { filterValue, preFilteredRows, setFilter } = column;
 
