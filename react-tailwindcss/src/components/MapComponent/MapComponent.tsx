@@ -17,6 +17,7 @@ type Center = {
 type Row = {
   index: number;
   original: Ship;
+  values: Ship;
 };
 
 type MapComponentProps = {
@@ -44,7 +45,9 @@ export const MapComponent: React.FC<MapComponentProps> = ({ rows, center }) => {
                 icon={shipIcon}
                 label={ship.original.shipName}
                 position={{ lat: ship.original.lat, lng: ship.original.lng }}
-                onClick={(e) => map.panTo(e.target.position)}
+                onClick={(e) =>
+                  map.panTo({ lat: ship.original.lat, lng: ship.original.lng })
+                }
               />
             ))}
           </GoogleMap>
