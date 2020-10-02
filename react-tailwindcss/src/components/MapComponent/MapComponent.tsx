@@ -19,12 +19,15 @@ type Row = {
   original: Ship;
 };
 
-type MapComponentProps = {
+interface MapComponentProps {
   rows: Row[];
   center: Center;
-};
+}
 
-export const MapComponent: React.FC<MapComponentProps> = ({ rows, center }) => {
+export const MapComponent: React.FC<MapComponentProps> = ({
+  rows,
+  center,
+}: MapComponentProps) => {
   let map;
   return (
     <div className="md:px-20 py-8 w-full">
