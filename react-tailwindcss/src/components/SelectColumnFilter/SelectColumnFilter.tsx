@@ -1,3 +1,15 @@
+import React from 'react';
+
+// type Column = {
+//   filterValue: string;
+//   preFilteredRows: string[];
+//   setFilter: (filter: string | undefined) => void;
+// };
+
+// interface DefaultColumnFilterProps {
+//   column: Column;
+// }
+
 export function SelectColumnFilter({
   column: { filterValue, setFilter, preFilteredRows, id },
 }) {
