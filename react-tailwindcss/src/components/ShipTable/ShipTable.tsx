@@ -3,53 +3,12 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import MapComponent from '../MapComponent/MapComponent';
 import UpdateButton from '../UpdateButton/UpdateButton';
-
-function DefaultColumnFilter({
-  column: { filterValue, preFilteredRows, setFilter },
-}) {
-  const count = preFilteredRows.length;
-
-  return (
-    <input
-      value={filterValue || ''}
-      onChange={(e) => {
-        setFilter(e.target.value || undefined);
-      }}
-      placeholder={`Search ${count} records...`}
-    />
-  );
-}
-
-function SelectColumnFilter({
-  column: { filterValue, setFilter, preFilteredRows, id },
-}) {
-  const options = React.useMemo(() => {
-    const options = new Set();
-    preFilteredRows.forEach((row) => {
-      options.add(row.values[id]);
-    });
-    return [...options.values()];
-  }, [id, preFilteredRows]);
-
-  return (
-    <select
-      value={filterValue}
-      onChange={(e) => {
-        setFilter(e.target.value || undefined);
-      }}
-    >
-      <option value="">All</option>
-      {options.map((option, i) => (
-        <option key={i} value={option}>
-          {option}
-        </option>
-      ))}
-    </select>
-  );
-}
+import { ShipsState } from '../../types/redux';
+import { DefaultColumnFilter } from '../DefaultColumnFilter/DefaultColumnFilter';
+import { SelectColumnFilter } from '../SelectColumnFilter/SelectColumnFilter';
 
 function ShipTable() {
-  const shipData = useSelector(function (state) {
+  const shipData = useSelector(function (state: ShipsState) {
     return state.ships;
   });
 
@@ -142,6 +101,7 @@ function ShipTable() {
   const mapCenter = { lat: 52.430514, lng: 4.162088 };
 
   return (
+    // TODO: add reasonable keys
     <div className="flex flex-col items-center">
       <MapComponent key={'map'} rows={rows} center={mapCenter} />
       <UpdateButton key={'update'} />
@@ -150,11 +110,12 @@ function ShipTable() {
           <table className="min-w-full bg-white" {...getTableProps()}>
             <thead className="bg-gray-800 text-white">
               {headerGroups.map((headerGroup) => (
-                <tr {...headerGroup.getHeaderGroupProps()}>
+                <tr {...headerGroup.getHeaderGroupProps()} key="KEY">
                   {headerGroup.headers.map((column) => (
                     <th
                       className="w-1/3 text-left py-3 px-4 uppercase font-semibold text-sm"
                       {...column.getHeaderProps()}
+                      key="ANOTHERKEY"
                     >
                       {column.render('Header')}
                       <div className="text-black">
@@ -170,12 +131,13 @@ function ShipTable() {
               {rows.map((row) => {
                 prepareRow(row);
                 return (
-                  <tr {...row.getRowProps()}>
+                  <tr {...row.getRowProps()} key="YET A THIRD KEY">
                     {row.cells.map((cell) => {
                       return (
                         <td
                           className="w-1/3 text-left py-3 px-4"
                           {...cell.getCellProps()}
+                          key="AND A FOURTH"
                         >
                           {cell.render('Cell')}
                         </td>
