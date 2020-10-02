@@ -3,7 +3,7 @@ import { updatePositions } from '../../services/apiService';
 import { useSelector, useDispatch } from 'react-redux';
 import { ShipsState } from '../../types/redux';
 
-function UpdateButton() {
+function UpdateButton(): JSX.Element {
   const ships = useSelector(function (state: ShipsState) {
     return state.ships;
   });
