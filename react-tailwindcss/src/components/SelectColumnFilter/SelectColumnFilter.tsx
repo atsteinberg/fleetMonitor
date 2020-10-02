@@ -1,4 +1,6 @@
 import React from 'react';
+import { FilterProps } from 'react-table';
+import { Ships } from '../../types/redux';
 
 // type Column = {
 //   filterValue: string;
@@ -11,18 +13,20 @@ import React from 'react';
 // }
 
 // TODO confirm actual types
-interface SelectColumnFilterProps {
-  filterValue: string;
-  setFilter: (input: string | undefined) => void;
-  preFilteredRows: Record<string, unknown>[];
-  id: string;
-}
+// interface ColumnProps {
+//   filterValue: string;
+//   setFilter: (input: string | undefined) => void;
+//   preFilteredRows: Record<string, unknown>[];
+//   id: string;
+// }
 
-export const SelectColumnFilter: React.FC<SelectColumnFilterProps> = (
-  column: SelectColumnFilterProps,
-) => {
-  console.log(column);
-  const { filterValue, setFilter, preFilteredRows, id } = column;
+// type ColumnObjectProps = {
+//   column: ColumnProps;
+// };
+
+export function SelectColumnFilter({
+  column: { filterValue, preFilteredRows, setFilter, id },
+}: FilterProps<Ships>): JSX.Element {
   const options = React.useMemo(() => {
     const options = new Set();
     preFilteredRows.forEach((row) => {
@@ -46,4 +50,4 @@ export const SelectColumnFilter: React.FC<SelectColumnFilterProps> = (
       ))}
     </select>
   );
-};
+}
