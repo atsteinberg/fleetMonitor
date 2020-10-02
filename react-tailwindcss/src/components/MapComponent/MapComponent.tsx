@@ -1,13 +1,30 @@
 import React from 'react';
 import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
 import shipIcon from './icons8-cargo-ship-100.png';
+import { Ships } from '../../types/redux';
+import { Ship } from '../../types/ShipInterface';
 
 const containerStyle = {
   width: '100%',
   height: '600px',
 };
 
-function MapComponent({ rows, center }) {
+type Center = {
+  lat: number;
+  lng: number;
+};
+
+type Row = {
+  index: number;
+  original: Ship;
+};
+
+type MapComponentProps = {
+  rows: Row[];
+  center: Center;
+};
+
+export const MapComponent: React.FC<MapComponentProps> = ({ rows, center }) => {
   let map;
   return (
     <div className="md:px-20 py-8 w-full">
@@ -35,6 +52,6 @@ function MapComponent({ rows, center }) {
       </div>
     </div>
   );
-}
+};
 
 export default React.memo(MapComponent);
