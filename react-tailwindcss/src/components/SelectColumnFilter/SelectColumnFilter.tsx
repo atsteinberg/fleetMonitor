@@ -23,7 +23,7 @@ export function SelectColumnFilter({
       <option value="">All</option>
       {options.map((option, i) => (
         <option key={i} value={option as string[]}>
-          {option}
+          {option as JSX.Element}
         </option>
       ))}
     </select>

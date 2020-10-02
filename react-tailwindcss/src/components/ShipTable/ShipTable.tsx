@@ -4,9 +4,10 @@ import { useSelector } from 'react-redux';
 import { ShipsState } from '../../types/redux';
 import { DefaultColumnFilter } from '../DefaultColumnFilter/DefaultColumnFilter';
 import { SelectColumnFilter } from '../SelectColumnFilter/SelectColumnFilter';
+import { Ship } from '../../types/ShipInterface';
 
 type ShipTableProps = {
-  setRows;
+  setRows: (rows: Row<Ship>[]) => void;
 };
 
 const EmptyDiv: React.FC<unknown> = () => <div></div>;
@@ -69,7 +70,7 @@ function ShipTable({ setRows }: ShipTableProps) {
 
   const filterTypes = React.useMemo(
     () => ({
-      text: (rows, id, filterValue) => {
+      text: (rows: Row<Ship>[], id: string, filterValue: string) => {
         return rows.filter((row) => {
           const rowValue = row.values[id];
           return rowValue !== undefined
@@ -82,7 +83,7 @@ function ShipTable({ setRows }: ShipTableProps) {
     }),
     [],
   );
-  const tableInstance = useTable(
+  const tableInstance = useTable<any>(
     {
       columns,
       data,
