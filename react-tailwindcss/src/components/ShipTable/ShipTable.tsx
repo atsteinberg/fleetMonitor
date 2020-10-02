@@ -106,54 +106,6 @@ function ShipTable({ setRows }: ShipTableProps) {
   }, [rows]);
 
   return (
-    // TODO: add reasonable keys
-
-    // <div className="md: px-20 py-8 w-full">
-    //   <div className="shadow overflow-hidden rounded border-b border-gray-200">
-    //     <table className="min-w-full bg-white" {...getTableProps()}>
-    //       <thead className="bg-gray-800 text-white">
-    //         {headerGroups.map((headerGroup) => (
-    //           <tr {...headerGroup.getHeaderGroupProps()} key="KEY">
-    //             {headerGroup.headers.map((column) => (
-    //               <th
-    //                 className="w-1/3 text-left py-3 px-4 uppercase font-semibold text-sm"
-    //                 {...column.getHeaderProps()}
-    //                 key="ANOTHERKEY"
-    //               >
-    //                 {column.render('Header')}
-    //                 <div className="text-black">
-    //                   {column.canFilter ? column.render('Filter') : null}
-    //                 </div>
-    //               </th>
-    //             ))}
-    //           </tr>
-    //         ))}
-    //       </thead>
-
-    //       <tbody className="text-gray-700" {...getTableBodyProps()}>
-    //         {rows.map((row) => {
-    //           prepareRow(row);
-    //           return (
-    //             <tr {...row.getRowProps()} key="YET A THIRD KEY">
-    //               {row.cells.map((cell) => {
-    //                 return (
-    //                   <td
-    //                     className="w-1/3 text-left py-3 px-4"
-    //                     {...cell.getCellProps()}
-    //                     key="AND A FOURTH"
-    //                   >
-    //                     {cell.render('Cell')}
-    //                   </td>
-    //                 );
-    //               })}
-    //             </tr>
-    //           );
-    //         })}
-    //       </tbody>
-    //     </table>
-    //   </div>
-    // </div>
-
     <table {...getTableProps()}>
       <thead>
         {headerGroups.map((headerGroup) => (
