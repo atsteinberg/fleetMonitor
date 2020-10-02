@@ -1,7 +1,7 @@
 import React from 'react';
 import './style/main.css';
 
-import ShipTable from './components/ShipTable/ShipTable';
+import { Main } from './containers/Main/Main';
 
 const App: React.FC<unknown> = () => {
   return (
@@ -9,7 +9,7 @@ const App: React.FC<unknown> = () => {
       <div className="p-4 m-4 bg-blue-600">
         <h1 className="text-2xl font-bold text-white">Fleet Spy</h1>
       </div>
-      <ShipTable />
+      <Main />
     </div>
   );
 };
