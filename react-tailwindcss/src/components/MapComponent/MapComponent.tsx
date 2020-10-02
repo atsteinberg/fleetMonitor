@@ -25,7 +25,6 @@ type MapComponentProps = {
 };
 
 export const MapComponent: React.FC<MapComponentProps> = ({ rows, center }) => {
-  console.log('ROWS', rows);
   let map;
   return (
     <div className="md:px-20 py-8 w-full">
