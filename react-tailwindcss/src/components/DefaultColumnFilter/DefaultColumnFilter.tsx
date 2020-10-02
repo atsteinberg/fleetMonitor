@@ -7,7 +7,9 @@ type Column = {
 };
 
 interface DefaultColumnFilterProps {
-  column: Column;
+  filterValue: string;
+  preFilteredRows: string[];
+  setFilter: (filter: string | undefined) => void;
 }
 
 export const DefaultColumnFilter: React.FC<DefaultColumnFilterProps> = (
