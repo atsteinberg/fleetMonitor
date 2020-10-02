@@ -18,6 +18,8 @@ function ShipTable({ setRows }: ShipTableProps) {
 
   const data = React.useMemo(() => shipData, [shipData]);
 
+  console.log('data', data);
+
   const columns = React.useMemo(
     () => [
       {

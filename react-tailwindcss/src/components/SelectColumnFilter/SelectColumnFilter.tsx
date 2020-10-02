@@ -21,6 +21,7 @@ interface SelectColumnFilterProps {
 export const SelectColumnFilter: React.FC<SelectColumnFilterProps> = (
   column: SelectColumnFilterProps,
 ) => {
+  console.log(column);
   const { filterValue, setFilter, preFilteredRows, id } = column;
   const options = React.useMemo(() => {
     const options = new Set();
