@@ -35,7 +35,6 @@ export const MapComponent: React.FC<MapComponentProps> = ({
           <GoogleMap
             onLoad={(loadedMap) => {
               map = loadedMap;
-              console.log(map);
             }}
             mapContainerStyle={containerStyle}
             center={center}
