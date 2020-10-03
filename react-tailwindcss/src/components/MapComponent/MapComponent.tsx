@@ -5,7 +5,7 @@ import {
   LoadScript,
   Marker,
 } from '@react-google-maps/api';
-import shipIcon from './icons8-cargo-ship-100.png';
+import shipIcon from './vessel.png';
 import { Ship } from '../../types/ShipInterface';
 import { Row } from 'react-table';
 
