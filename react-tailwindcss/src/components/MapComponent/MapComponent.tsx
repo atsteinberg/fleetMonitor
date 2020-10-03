@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   GoogleMap,
   InfoWindow,
@@ -32,6 +32,24 @@ export const MapComponent: React.FC<MapComponentProps> = ({
   rows,
   center,
 }: MapComponentProps) => {
+  const [selectedMarker, setSelectedMarker] = useState(null);
+  const [markerMap, setMarkerMap] = useState({});
+  const [infoOpen, setInfoOpen] = useState(false);
+
+  const markerLoadHandler = (marker, ship) => {
+    return setMarkerMap((prevState) => {
+      return { ...prevState, [ship.id]: marker };
+    });
+  };
+
+  const markerClickHandler = (event, ship) => {
+    setSelectedMarker(ship);
+    if (infoOpen) {
+      setInfoOpen(false);
+    }
+    setInfoOpen(true);
+  };
+
   let map;
   return (
     <div className="md:px-20 py-8 w-full">
@@ -51,21 +69,23 @@ export const MapComponent: React.FC<MapComponentProps> = ({
                 icon={shipIcon}
                 label={ship.original.shipName}
                 position={{ lat: ship.original.lat, lng: ship.original.lng }}
-                onClick={() => {
-                  map.panTo({ lat: ship.original.lat, lng: ship.original.lng });
-                  map.setZoom(6);
-                }}
-              >
-                <InfoWindow key={ship.index}>
-                  <div>
-                    <p>Name: {ship.original.shipName}</p>
-                    <p>Owner: {ship.original.owner}</p>
-                    <p>Type: {ship.original.type}</p>
-                    <p>MMSI: {ship.original.mmsi}</p>
-                  </div>
-                </InfoWindow>
-              </Marker>
+                onLoad={(marker) => markerLoadHandler(marker, ship)}
+                onClick={(event) => markerClickHandler(event, ship)}
+              />
             ))}
+            {infoOpen && selectedMarker && (
+              <InfoWindow
+                anchor={markerMap[selectedMarker.id]}
+                onCloseClick={() => setInfoOpen(false)}
+              >
+                <div>
+                  <h1>{selectedMarker.original.shipName}</h1>
+                  <p>Owner: {selectedMarker.original.owner}</p>
+                  <p>Type: {selectedMarker.original.type}</p>
+                  <p>MMSI: {selectedMarker.original.mmsi}</p>
+                </div>
+              </InfoWindow>
+            )}
           </GoogleMap>
         </LoadScript>
       </div>
