@@ -2139,11 +2139,17 @@ video {
   background-color: rgba(144, 205, 244, var(--bg-opacity));
 }
 
+.bg-blue-350 {
+  --bg-opacity: 1;
+  background-color: #009aff;
+  background-color: rgba(0, 154, 255, var(--bg-opacity));
+}
 .bg-blue-400 {
   --bg-opacity: 1;
   background-color: #63b3ed;
   background-color: rgba(99, 179, 237, var(--bg-opacity));
 }
+
 
 .bg-blue-500 {
   --bg-opacity: 1;
