@@ -17,6 +17,7 @@
     "@types/react-redux": "^7.1.9",
     "@types/react-table": "^7.0.23",
     "ais": "^2.0.1",
+    "dotenv": "^8.2.0",
     "font-awesome": "^4.7.0",
     "match-sorter": "^4.2.1",
     "react": "^16.13.1",

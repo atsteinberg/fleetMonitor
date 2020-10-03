@@ -6,7 +6,6 @@ import {
   Marker,
 } from '@react-google-maps/api';
 import shipIcon from './icons8-cargo-ship-100.png';
-import { Ships } from '../../types/redux';
 import { Ship } from '../../types/ShipInterface';
 
 const containerStyle = {
@@ -22,7 +21,6 @@ type Center = {
 type Row = {
   index: number;
   original: Ship;
-  values: Ship;
 };
 
 interface MapComponentProps {
@@ -53,7 +51,7 @@ export const MapComponent: React.FC<MapComponentProps> = ({
                 icon={shipIcon}
                 label={ship.original.shipName}
                 position={{ lat: ship.original.lat, lng: ship.original.lng }}
-                onClick={(e) => {
+                onClick={() => {
                   map.panTo({ lat: ship.original.lat, lng: ship.original.lng });
                   map.setZoom(6);
                 }}
