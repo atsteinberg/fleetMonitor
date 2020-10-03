@@ -19,12 +19,6 @@ type Center = {
   lng: number;
 };
 
-// type Row = {
-//   index: number;
-//   original: Ship;
-//   id: number;
-// };
-
 interface MapComponentProps {
   rows: Row<Ship>[];
   center: Center;
@@ -59,15 +53,11 @@ export const MapComponent: React.FC<MapComponentProps> = ({
     setInfoOpen(true);
   };
 
-  // let map: google.maps.Map;
   return (
     <div className="md:px-20 py-8 w-full">
       <div className="shadow overflow-hidden rounded border-b border-gray-200">
         <LoadScript googleMapsApiKey={process.env.REACT_APP_API_MAPS}>
           <GoogleMap
-            // onLoad={(loadedMap) => {
-            //   map = loadedMap;
-            // }}
             mapContainerStyle={containerStyle}
             center={center}
             zoom={3}
