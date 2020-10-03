@@ -1,4 +1,10 @@
-import { useTable, useFilters, useGlobalFilter, Row } from 'react-table';
+import {
+  useTable,
+  useFilters,
+  useGlobalFilter,
+  Row,
+  Column,
+} from 'react-table';
 import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { ShipsState } from '../../types/redux';
@@ -13,11 +19,11 @@ type ShipTableProps = {
 const EmptyDiv: React.FC<unknown> = () => <div></div>;
 
 function ShipTable({ setRows }: ShipTableProps) {
-  const shipData = useSelector((state: ShipsState) => state.ships);
+  const shipData: Ship[] = useSelector((state: ShipsState) => state.ships);
 
-  const data = React.useMemo(() => shipData, [shipData]);
+  const data = React.useMemo<Ship[]>(() => shipData, [shipData]);
 
-  const columns = React.useMemo(
+  const columns = React.useMemo<Column<Ship>[]>(
     () => [
       {
         Header: 'Ship Name',
@@ -83,7 +89,7 @@ function ShipTable({ setRows }: ShipTableProps) {
     }),
     [],
   );
-  const tableInstance = useTable<any>(
+  const tableInstance = useTable<Ship>(
     {
       columns,
       data,
