@@ -35,11 +35,20 @@ export const MapComponent: React.FC<MapComponentProps> = ({
   const [selectedMarker, setSelectedMarker] = useState<Row<Ship> | null>(null);
   const [markerMap, setMarkerMap] = useState<MapEntry>({});
   const [infoOpen, setInfoOpen] = useState(false);
+  const [map, setMap] = useState<google.maps.Map | null>(null);
 
   const markerLoadHandler = (marker: google.maps.Marker, ship: Row<Ship>) => {
     return setMarkerMap((prevState) => {
       return { ...prevState, [ship.id]: marker };
     });
+  };
+
+  const loadHandler = (loadedMap: google.maps.Map) => {
+    setMap(loadedMap);
+  };
+
+  const unmountHandler = () => {
+    setMap(null);
   };
 
   const markerClickHandler = (
@@ -61,6 +70,8 @@ export const MapComponent: React.FC<MapComponentProps> = ({
             mapContainerStyle={containerStyle}
             center={center}
             zoom={3}
+            onLoad={loadHandler}
+            onUnmount={unmountHandler}
           >
             {rows.map((ship) => (
               <Marker
@@ -70,6 +81,9 @@ export const MapComponent: React.FC<MapComponentProps> = ({
                 position={{ lat: ship.original.lat, lng: ship.original.lng }}
                 onLoad={(marker) => markerLoadHandler(marker, ship)}
                 onClick={(event) => markerClickHandler(event, ship)}
+                onDblClick={(event) => {
+                  map?.panTo(event.latLng);
+                }}
               />
             ))}
             {infoOpen && selectedMarker && (
