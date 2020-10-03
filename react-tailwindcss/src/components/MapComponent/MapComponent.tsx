@@ -7,6 +7,7 @@ import {
 } from '@react-google-maps/api';
 import shipIcon from './icons8-cargo-ship-100.png';
 import { Ship } from '../../types/ShipInterface';
+import { Row } from 'react-table';
 
 const containerStyle = {
   width: '100%',
@@ -18,31 +19,33 @@ type Center = {
   lng: number;
 };
 
-type Row = {
-  index: number;
-  original: Ship;
-};
-
 interface MapComponentProps {
-  rows: Row[];
+  rows: Row<Ship>[];
   center: Center;
+}
+
+interface MapEntry {
+  [id: string]: google.maps.Marker;
 }
 
 export const MapComponent: React.FC<MapComponentProps> = ({
   rows,
   center,
 }: MapComponentProps) => {
-  const [selectedMarker, setSelectedMarker] = useState(null);
-  const [markerMap, setMarkerMap] = useState({});
+  const [selectedMarker, setSelectedMarker] = useState<Row<Ship> | null>(null);
+  const [markerMap, setMarkerMap] = useState<MapEntry>({});
   const [infoOpen, setInfoOpen] = useState(false);
 
-  const markerLoadHandler = (marker, ship) => {
+  const markerLoadHandler = (marker: google.maps.Marker, ship: Row<Ship>) => {
     return setMarkerMap((prevState) => {
       return { ...prevState, [ship.id]: marker };
     });
   };
 
-  const markerClickHandler = (event, ship) => {
+  const markerClickHandler = (
+    event: google.maps.MouseEvent,
+    ship: Row<Ship>,
+  ) => {
     setSelectedMarker(ship);
     if (infoOpen) {
       setInfoOpen(false);
@@ -50,15 +53,11 @@ export const MapComponent: React.FC<MapComponentProps> = ({
     setInfoOpen(true);
   };
 
-  let map;
   return (
     <div className="md:px-20 py-8 w-full">
       <div className="shadow overflow-hidden rounded border-b border-gray-200">
         <LoadScript googleMapsApiKey={process.env.REACT_APP_API_MAPS}>
           <GoogleMap
-            onLoad={(loadedMap) => {
-              map = loadedMap;
-            }}
             mapContainerStyle={containerStyle}
             center={center}
             zoom={3}
