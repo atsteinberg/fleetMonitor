@@ -32,6 +32,7 @@ export const MapComponent: React.FC<MapComponentProps> = ({
   rows,
   center,
 }: MapComponentProps) => {
+
   const [selectedMarker, setSelectedMarker] = useState(null);
   const [markerMap, setMarkerMap] = useState({});
   const [infoOpen, setInfoOpen] = useState(false);
@@ -50,7 +51,7 @@ export const MapComponent: React.FC<MapComponentProps> = ({
     setInfoOpen(true);
   };
 
-  let map;
+  let map: google.maps.Map;
   return (
     <div className="md:px-20 py-8 w-full">
       <div className="shadow overflow-hidden rounded border-b border-gray-200">
@@ -69,8 +70,10 @@ export const MapComponent: React.FC<MapComponentProps> = ({
                 icon={shipIcon}
                 label={ship.original.shipName}
                 position={{ lat: ship.original.lat, lng: ship.original.lng }}
+
                 onLoad={(marker) => markerLoadHandler(marker, ship)}
                 onClick={(event) => markerClickHandler(event, ship)}
+
               />
             ))}
             {infoOpen && selectedMarker && (
