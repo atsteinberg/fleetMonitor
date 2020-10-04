@@ -14,6 +14,7 @@ describe('ShipTable', () => {
   beforeEach(() => {
     const { getByTestId } = render(
       <Provider store={store}>
+        {/* eslint-disable-next-line @typescript-eslint/no-empty-function */}
         <ShipTable setRows={() => {}} />
       </Provider>,
     );
@@ -21,7 +22,6 @@ describe('ShipTable', () => {
     ownerHeader = getByTestId('header-Owner');
   });
   it('should have an owner header', () => {
-    // eslint-disable-next-line @typescript-eslint/no-empty-function
     expect(ownerHeader.textContent).toMatch('Owner');
   });
   it('should initially have 23 entries', () => {
