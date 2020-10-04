@@ -237,6 +237,6 @@ const getAll = Promise.all(
   ),
 );
 
-getAll.then((data: unknown) => {
+getAll.then((data) => {
   fs.writeFileSync(FILEPATH, JSON.stringify(data));
 });
