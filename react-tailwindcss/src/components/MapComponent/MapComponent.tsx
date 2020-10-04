@@ -43,9 +43,18 @@ export const MapComponent: React.FC<MapComponentProps> = ({
   const [clicked, setClicked] = useState<ClickedEntry>({});
 
   const markerLoadHandler = (marker: google.maps.Marker, ship: Row<Ship>) => {
+    setClicked((prevState) => ({ ...prevState, [ship.id]: false }));
     return setMarkerMap((prevState) => {
       return { ...prevState, [ship.id]: marker };
     });
+  };
+
+  const markerUnmountHandler = (ship: Row<Ship>) => {
+    setClicked((prevState) => ({
+      ...prevState,
+      [ship.id]: false,
+      global: false,
+    }));
   };
 
   const loadHandler = (loadedMap: google.maps.Map) => {
@@ -115,6 +124,7 @@ export const MapComponent: React.FC<MapComponentProps> = ({
                 label={ship.original.shipName}
                 position={{ lat: ship.original.lat, lng: ship.original.lng }}
                 onLoad={(marker) => markerLoadHandler(marker, ship)}
+                onUnmount={() => markerUnmountHandler(ship)}
                 onMouseOver={() => markerMouseOverHandler(ship)}
                 onMouseOut={() => markerMouseOutHandler(ship)}
                 onClick={() => markerClickHandler(ship)}
