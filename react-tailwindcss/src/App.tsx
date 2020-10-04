@@ -6,7 +6,7 @@ import { Main } from './containers/Main/Main';
 const App: React.FC<unknown> = () => {
   return (
     <div>
-      <div className="p-4 m-4 bg-blue-350">
+      <div className="p-4 m-4 bg-blue-400">
         <h1 className="md:inline-block text-2xl font-medium italic text-white .inline-block">
           Fleet
         </h1>

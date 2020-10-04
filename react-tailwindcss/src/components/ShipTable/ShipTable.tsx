@@ -4,6 +4,7 @@ import {
   useGlobalFilter,
   Row,
   Column,
+  useSortBy,
 } from 'react-table';
 import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
@@ -32,6 +33,7 @@ function ShipTable({ setRows }: ShipTableProps) {
       {
         Header: 'MMSI #',
         accessor: 'mmsi',
+        sortType: 'basic',
       },
       {
         Header: 'Ship Type',
@@ -89,6 +91,7 @@ function ShipTable({ setRows }: ShipTableProps) {
     }),
     [],
   );
+
   const tableInstance = useTable<Ship>(
     {
       columns,
@@ -98,6 +101,7 @@ function ShipTable({ setRows }: ShipTableProps) {
     },
     useFilters,
     useGlobalFilter,
+    useSortBy,
   );
 
   const {
@@ -118,13 +122,27 @@ function ShipTable({ setRows }: ShipTableProps) {
         {headerGroups.map((headerGroup) => (
           <tr {...headerGroup.getHeaderGroupProps()} key="headers">
             {headerGroup.headers.map((column) => {
+              const {
+                render,
+                getHeaderProps,
+                isSorted,
+                isSortedDesc,
+                getSortByToggleProps,
+                Header,
+              } = column;
+              const extraClass = isSorted
+                ? isSortedDesc
+                  ? 'desc'
+                  : 'asc'
+                : '';
               return (
                 <th
-                  {...column.getHeaderProps()}
-                  key={'header-' + column.Header}
+                  className={extraClass}
+                  {...getHeaderProps(getSortByToggleProps())}
+                  key={'header-' + Header}
                 >
                   {column.render('Header')}
-                  <div>{column.canFilter ? column.render('Filter') : null}</div>
+                  <div>{column.canFilter ? render('Filter') : null}</div>
                 </th>
               );
             })}
