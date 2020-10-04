@@ -79,7 +79,6 @@ export const MapComponent: React.FC<MapComponentProps> = ({
   };
 
   const markerMouseOverHandler = (ship: Row<Ship>) => {
-    console.log(clicked.global);
     if (!clicked.global) showInfo(ship);
   };
 
