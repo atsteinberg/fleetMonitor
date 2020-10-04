@@ -217,26 +217,26 @@ const MMSIs = ships.map((ship) => ship.mmsi);
 
 const FILEPATH = 'data.json';
 
-const BASE_URL = `https://services.marinetraffic.com/api/voyageforecast/${process.env.REACT_APP_API_MARINETRAFFIC}/protocol:json/mmsi:`;
+const BASE_URL = `https://services.marinetraffic.com/api/voyageforecast/${process.env.REACT_APP_API_MARINETRAFFIC_VI01}/protocol:json/msgtype:extended/mmsi:`;
 
-const NEW_BASE_URL = `https://services.marinetraffic.com/api/exportvessel/v:5/${process.env.REACT_APP_API_MARINETRAFFIC}/timespan:2880/protocol:json/mmsi:`;
+const NEW_BASE_URL = `https://services.marinetraffic.com/api/exportvessel/v:5/${process.env.REACT_APP_API_MARINETRAFFIC_PS07}/timespan:2880/protocol:json/mmsi:`;
 
-// const URLs: string[] = MMSIs.map((mmsi) => BASE_URL + mmsi);
-// console.log(URLs);
-const URLs = ['https://run.mocky.io/v3/ae506d98-9f5d-40a9-8b59-02ff0e7b6a12'];
+const URLs = MMSIs.slice(0, 1).map((mmsi) => BASE_URL + mmsi);
+console.log(URLs);
+// const URLs = ['https://run.mocky.io/v3/ae506d98-9f5d-40a9-8b59-02ff0e7b6a12'];
 
 // fetch real data from marinetraffic api
 
-const getAll = Promise.all(
-  URLs.map((url) =>
-    fetch(url).then((res) => {
-      if (res.ok) return res.json();
-      console.error('response not ok');
-      console.error(res);
-    }),
-  ),
-);
+// const getAll = Promise.all(
+//   URLs.map((url) =>
+//     fetch(url).then((res) => {
+//       if (res.ok) return res.json();
+//       console.error('response not ok');
+//       console.error(res);
+//     }),
+//   ),
+// );
 
-getAll.then((data) => {
-  fs.writeFileSync(FILEPATH, JSON.stringify(data));
-});
+// getAll.then((data) => {
+//   fs.writeFileSync(FILEPATH, JSON.stringify(data));
+// });
