@@ -1,9 +1,7 @@
-import fs from 'fs';
-import fetch from 'node-fetch';
-import dotenv from 'dotenv';
-dotenv.config();
+import { readFileSync } from 'fs';
+import { act } from 'react-testing-library';
 
-const ships = [
+const _ships = [
   {
     shipName: 'Zea Fame',
     mmsi: 255806176,
@@ -213,30 +211,29 @@ const ships = [
   },
 ];
 
-const MMSIs = ships.map((ship) => ship.mmsi);
-
-const FILEPATH = 'data.json';
-
-const BASE_URL = `https://services.marinetraffic.com/api/voyageforecast/${process.env.REACT_APP_API_MARINETRAFFIC}/protocol:json/mmsi:`;
-
-const NEW_BASE_URL = `https://services.marinetraffic.com/api/exportvessel/v:5/${process.env.REACT_APP_API_MARINETRAFFIC}/timespan:2880/protocol:json/mmsi:`;
-
-// const URLs: string[] = MMSIs.map((mmsi) => BASE_URL + mmsi);
-// console.log(URLs);
-const URLs = ['https://run.mocky.io/v3/ae506d98-9f5d-40a9-8b59-02ff0e7b6a12'];
-
-// fetch real data from marinetraffic api
-
-const getAll = Promise.all(
-  URLs.map((url) =>
-    fetch(url).then((res) => {
-      if (res.ok) return res.json();
-      console.error('response not ok');
-      console.error(res);
-    }),
+const _ps07 = JSON.parse(
+  readFileSync(
+    '/Users/dev/Documents/projects/codeworks/senior/legacy/fleetMonitor/react-tailwindcss/data/PS07sampledata.json',
+    'utf8',
+  ),
+);
+const _vi01 = JSON.parse(
+  readFileSync(
+    '/Users/dev/Documents/projects/codeworks/senior/legacy/fleetMonitor/react-tailwindcss/data/VI01sampledata.json',
+    'utf8',
   ),
 );
 
-getAll.then((data: unknown) => {
-  fs.writeFileSync(FILEPATH, JSON.stringify(data));
-});
+export const mock = {
+  ps07: jest.fn(() => {
+    return {
+      then: (callback) => act(() => callback(_ps07)),
+    };
+  }),
+  vi07: jest.fn(() => {
+    return {
+      then: (callback) => act(() => callback(_vi01)),
+    };
+  }),
+  ships: _ships,
+};

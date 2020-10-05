@@ -140,6 +140,8 @@ function ShipTable({ setRows }: ShipTableProps) {
                   className={extraClass}
                   {...getHeaderProps(getSortByToggleProps())}
                   key={'header-' + Header}
+                  id={'header-' + Header}
+                  data-testid={'header-' + Header}
                 >
                   {column.render('Header')}
                   <div>{column.canFilter ? render('Filter') : null}</div>
@@ -149,7 +151,7 @@ function ShipTable({ setRows }: ShipTableProps) {
           </tr>
         ))}
       </thead>
-      <tbody {...getTableBodyProps()}>
+      <tbody {...getTableBodyProps()} data-testid="table-body">
         {rows.map((row) => {
           prepareRow(row);
           return (
@@ -159,6 +161,7 @@ function ShipTable({ setRows }: ShipTableProps) {
                   <td
                     {...cell.getCellProps()}
                     key={'row' + cell.row.id + '-' + cell.column.Header}
+                    data-testid={'row' + cell.row.id + '-' + cell.column.Header}
                   >
                     {cell.render('Cell')}
                   </td>
