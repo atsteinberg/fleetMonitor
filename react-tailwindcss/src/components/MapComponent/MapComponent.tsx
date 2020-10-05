@@ -5,9 +5,14 @@ import {
   LoadScript,
   Marker,
 } from '@react-google-maps/api';
-import shipIcon from './vessel.png';
+// import shipIcon from './ship.png';
 import { Ship } from '../../types/ShipInterface';
 import { Row } from 'react-table';
+
+import bbcIcon from './bbcicon.png';
+// import belugaIcon from './belugaicon.png';
+// import salIcon from './salicon.png';
+// import uhlIcon from './uhlicon.png';
 
 const containerStyle = {
   width: '100%',
@@ -120,7 +125,7 @@ export const MapComponent: React.FC<MapComponentProps> = ({
             {rows.map((ship) => (
               <Marker
                 key={ship.index}
-                icon={shipIcon}
+                icon={bbcIcon}
                 label={ship.original.shipName}
                 position={{ lat: ship.original.lat, lng: ship.original.lng }}
                 onLoad={(marker) => markerLoadHandler(marker, ship)}
