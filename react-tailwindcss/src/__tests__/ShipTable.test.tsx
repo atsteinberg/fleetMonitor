@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, cleanup, getAllByTestId } from '@testing-library/react';
+import { render, cleanup } from '@testing-library/react';
 // import { ps07, vi01, ships } from './__mocks__/@fleetSpy/transmarine.mjs';
 import ShipTable from '../components/ShipTable/ShipTable';
 import { Provider } from 'react-redux';
