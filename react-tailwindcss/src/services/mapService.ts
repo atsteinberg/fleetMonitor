@@ -30,6 +30,10 @@ export function calculateFuturePositions(
         currentWaypoint,
         distancePerStep,
       );
+      futurePositions[timeAtStep] = {
+        ...currentPosition,
+        time: new Date(timeAtStep),
+      };
     }
     excessDistance = distanceToNextWaypoint;
     previousWaypoint = currentWaypoint;
