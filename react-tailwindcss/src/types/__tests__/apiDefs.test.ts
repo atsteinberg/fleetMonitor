@@ -60,7 +60,7 @@ const voyageObject = {
   etaCalc: new Date('2020-10-05T00:18:00'),
   distanceTravelled: 3466,
   distanceToGo: 320,
-  speedCalc: 108,
+  speedCalc: 10.8,
   draught: 67,
   draughtMax: 89,
   loadStatusName: 'PARTIALLY_LADEN',
