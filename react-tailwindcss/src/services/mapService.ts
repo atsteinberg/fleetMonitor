@@ -1,4 +1,4 @@
-export interface Positions {
+interface Positions {
   [time: string]: {
     time: Date;
     lat: number;
@@ -11,7 +11,7 @@ interface LatLng {
   lng: number;
 }
 
-export class VoyageInfo {
+class VoyageInfo {
   mmsi: number;
   destination: string;
   lastPortId: string;
@@ -68,19 +68,17 @@ export class VoyageInfo {
     this.draught = parseInt(draught);
     this.draughtMax = parseInt(draughtMax);
     this.loadStatusName = loadStatusName;
-    this.route = VoyageInfo.parse(route);
+    this.route = this.parse(route);
   }
 
-  static parse(route: string): LatLng[] {
-    const segments = [];
-    const trimmedRoute = route.match(/^LINESTRING \((.*)\)$/);
-    const segmentStrings =
-      trimmedRoute && trimmedRoute.length > 1 ? trimmedRoute[1].split(',') : [];
+  parse(route: string): LatLng[] {}
+}
 
-    for (const segment of segmentStrings) {
-      const [lat, lng] = segment.trim().split(' ');
-      segments.push({ lat: parseFloat(lat), lng: parseFloat(lng) });
-    }
-    return segments;
-  }
+export function calculateFuturePositions(
+  step: number,
+  data: VoyageInfo,
+): Positions {
+  const futurePositions = {};
+
+  return futurePositions;
 }
