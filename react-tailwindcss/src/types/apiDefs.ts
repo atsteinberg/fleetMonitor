@@ -71,5 +71,16 @@ export class VoyageInfo {
     this.route = this.parse(route);
   }
 
-  parse(route: string): LatLng[] {}
+  parse(route: string): LatLng[] {
+    const segments = [];
+    const trimmedRoute = route.match(/^LINESTRING \((\.*)\)$/);
+    const segmentStrings =
+      trimmedRoute && trimmedRoute.length > 1 ? trimmedRoute[1].split(',') : [];
+
+    for (const segment of segmentStrings) {
+      const [lat, lng] = segment.split(' ');
+      segments.push({ lat: parseFloat(lat), lng: parseFloat(lng) });
+    }
+    return segments;
+  }
 }
