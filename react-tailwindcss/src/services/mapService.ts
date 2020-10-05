@@ -1,84 +1,39 @@
-interface Positions {
-  [time: string]: {
-    time: Date;
-    lat: number;
-    lng: number;
-  };
-}
-
-interface LatLng {
-  lat: number;
-  lng: number;
-}
-
-class VoyageInfo {
-  mmsi: number;
-  destination: string;
-  lastPortId: string;
-  lastPortName: string;
-  lastPortUnlocode: string;
-  lastPortTime: Date;
-  nexPortId: string;
-  nextPortName: string;
-  nextPortUnlocode: string;
-  eta: Date;
-  etaCalc: Date;
-  distanceTravelled: number;
-  distanceToGo: number;
-  speedCalc: number;
-  draught: number;
-  draughtMax: number;
-  loadStatusName: string;
-  route: LatLng[];
-
-  constructor([
-    mmsi,
-    destination,
-    lastPortId,
-    lastPortName,
-    lastPortUnlocode,
-    lastPortTime,
-    nexPortId,
-    nextPortName,
-    nextPortUnlocode,
-    eta,
-    etaCalc,
-    distanceTravelled,
-    distanceToGo,
-    speedCalc,
-    draught,
-    draughtMax,
-    loadStatusName,
-    route,
-  ]: string[]) {
-    this.mmsi = parseInt(mmsi);
-    this.destination = destination;
-    this.lastPortId = lastPortId;
-    this.lastPortName = lastPortName;
-    this.lastPortUnlocode = lastPortUnlocode;
-    this.lastPortTime = new Date(lastPortTime);
-    this.nexPortId = nexPortId;
-    this.nextPortName = nextPortName;
-    this.nextPortUnlocode = nextPortUnlocode;
-    this.eta = new Date(eta);
-    this.etaCalc = new Date(etaCalc);
-    this.distanceTravelled = parseInt(distanceTravelled);
-    this.distanceToGo = parseInt(distanceToGo);
-    this.speedCalc = parseInt(speedCalc);
-    this.draught = parseInt(draught);
-    this.draughtMax = parseInt(draughtMax);
-    this.loadStatusName = loadStatusName;
-    this.route = this.parse(route);
-  }
-
-  parse(route: string): LatLng[] {}
-}
+import { Positions, VoyageInfo } from '../types/apiDefs';
+import { calculateDistance, calculateNextPoint } from './helpers';
 
 export function calculateFuturePositions(
-  step: number,
+  // we will have a systematic error here, since port locations are
+  // not always available. Instead of calculating from the port of arrival
+  // we will start calculating estimated position at the last way point
+  step = 60,
   data: VoyageInfo,
 ): Positions {
-  const futurePositions = {};
+  const futurePositions: Positions = {};
+  const distancePerStep = (data.speedCalc * step) / 60;
+  let previousWaypoint = data.route[data.route.length - 1];
+  let currentPosition = previousWaypoint;
+  let excessDistance = 0;
+  let timeAtStep = data.etaCalc.getTime();
+  futurePositions[timeAtStep] = {
+    ...currentPosition,
+    time: new Date(timeAtStep),
+  };
+  for (let i = 0; i < data.route.length - 1; i++) {
+    const currentWaypoint = data.route[data.route.length - 2 - i];
+    let distanceToNextWaypoint =
+      calculateDistance(currentWaypoint, previousWaypoint) - excessDistance;
+    while (distanceToNextWaypoint > distancePerStep) {
+      distanceToNextWaypoint -= distancePerStep;
+      timeAtStep -= step * 60 * 1000;
+      currentPosition = calculateNextPoint(
+        currentPosition,
+        currentWaypoint,
+        distancePerStep,
+      );
+    }
+    excessDistance = distanceToNextWaypoint;
+    previousWaypoint = currentWaypoint;
+  }
 
   return futurePositions;
 }
