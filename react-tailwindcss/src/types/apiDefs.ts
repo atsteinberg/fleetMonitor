@@ -1,12 +1,12 @@
 export interface Positions {
-  [time: string]: {
+  [time: number]: {
     time: Date;
     lat: number;
     lng: number;
   };
 }
 
-interface LatLng {
+export interface LatLng {
   lat: number;
   lng: number;
 }
@@ -64,7 +64,8 @@ export class VoyageInfo {
     this.etaCalc = new Date(etaCalc);
     this.distanceTravelled = parseInt(distanceTravelled);
     this.distanceToGo = parseInt(distanceToGo);
-    this.speedCalc = parseInt(speedCalc);
+    // marinetraffic api gives calculated speed in 1/10 kn, for some reason
+    this.speedCalc = parseInt(speedCalc) / 10;
     this.draught = parseInt(draught);
     this.draughtMax = parseInt(draughtMax);
     this.loadStatusName = loadStatusName;
