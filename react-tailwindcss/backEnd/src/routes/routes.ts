@@ -9,9 +9,9 @@ router.get('/', [], async (req: Request, res: Response) => {
 });
 
 router.post('/', async (req: Request, res: Response) => {
-  const { shipName, mmsi, type, owner, lat, lng, updated } = req.body;
+  const { shipName, mmsi, type, owner, position } = req.body;
 
-  const ship = Ship.build({ shipName, mmsi, type, owner, lat, lng, updated });
+  const ship = Ship.build({ shipName, mmsi, type, owner, position });
   await ship.save();
   return res.status(201).send(ship);
 });
