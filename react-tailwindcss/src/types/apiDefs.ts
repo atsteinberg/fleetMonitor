@@ -62,10 +62,10 @@ export class VoyageInfo {
     this.nextPortUnlocode = nextPortUnlocode;
     this.eta = new Date(eta + 'Z');
     this.etaCalc = new Date(etaCalc + 'Z');
-    this.distanceTravelled = parseInt(distanceTravelled);
-    this.distanceToGo = parseInt(distanceToGo);
+    this.distanceTravelled = parseInt(distanceTravelled) * 1.852;
+    this.distanceToGo = parseInt(distanceToGo) * 1.852;
     // marinetraffic api gives calculated speed in 1/10 kn, for some reason
-    this.speedCalc = parseInt(speedCalc) / 10;
+    this.speedCalc = (parseInt(speedCalc) * 1.852) / 10;
     this.draught = parseInt(draught);
     this.draughtMax = parseInt(draughtMax);
     this.loadStatusName = loadStatusName;
