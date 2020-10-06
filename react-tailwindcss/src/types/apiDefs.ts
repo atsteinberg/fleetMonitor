@@ -79,7 +79,7 @@ export class VoyageInfo {
       trimmedRoute && trimmedRoute.length > 1 ? trimmedRoute[1].split(',') : [];
 
     for (const segment of segmentStrings) {
-      const [lat, lng] = segment.trim().split(' ');
+      const [lng, lat] = segment.trim().split(' ');
       segments.push({ lat: parseFloat(lat), lng: parseFloat(lng) });
     }
     return segments;

@@ -1,4 +1,4 @@
-import { VoyageInfo } from '../apiDefs';
+import { VoyageInfo } from '../types/apiDefs';
 const voyage = [
   '255806176',
   'AU PHE',
@@ -91,6 +91,7 @@ const voyageObject = {
 describe('constructor', () => {
   it('should create new voyage object instance from array', () => {
     const myVoyage = new VoyageInfo(voyage);
+    expect(myVoyage).toBeInstanceOf(VoyageInfo);
     expect(myVoyage).toMatchObject(voyageObject);
   });
 });
@@ -101,3 +102,4 @@ describe('parse', () => {
     expect(myRoute).toStrictEqual(route);
   });
 });
+// TODO: check that routes are parsed correctly (mapping lats to lat and lngs to lng)

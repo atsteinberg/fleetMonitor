@@ -20,7 +20,7 @@ export function calculateDistance(
   return d / 1000;
 }
 
-function calculateBearing(
+export function calculateBearing(
   pos1: { lat: number; lng: number },
   pos2: {
     lat: number;
@@ -45,22 +45,23 @@ export function calculateNextPoint(
   wayPoint: { lat: number; lng: number },
   distance: number,
 ): LatLng {
+  const d = distance * 1000;
   const brng = calculateBearing(previous, wayPoint);
   const R = 6371e3;
   const φ1 = (previous.lat * Math.PI) / 180;
   const λ1 = (previous.lng * Math.PI) / 180;
   const φ2 = Math.asin(
-    Math.sin(φ1) * Math.cos(distance / R) +
-      Math.cos(φ1) * Math.sin(distance / R) * Math.cos(brng),
+    Math.sin(φ1) * Math.cos(d / R) +
+      Math.cos(φ1) * Math.sin(d / R) * Math.cos(brng),
   );
   const λ2 =
     λ1 +
     Math.atan2(
-      Math.sin(brng) * Math.sin(distance / R) * Math.cos(φ1),
-      Math.cos(distance / R) - Math.sin(φ1) * Math.sin(φ2),
+      Math.sin(brng) * Math.sin(d / R) * Math.cos(φ1),
+      Math.cos(d / R) - Math.sin(φ1) * Math.sin(φ2),
     );
   return {
-    lat: λ1,
-    lng: λ2,
+    lat: (φ2 * 180) / Math.PI,
+    lng: (λ2 * 180) / Math.PI,
   };
 }

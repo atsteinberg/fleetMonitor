@@ -17,5 +17,5 @@
     "jsx": "react",
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src", "backEnd"]
+  "include": ["src", "backEnd", "__mocks__"]
 }
