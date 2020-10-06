@@ -16,6 +16,15 @@ const dist1 = 147.8;
 const bearing1 = 166 + 12 / 60 + 10 / 3600;
 const bearing2 = 329 + 49 / 60 + 32 / 3600;
 
+const c4 = {
+  lat: -20.2228,
+  lng: 118.557,
+};
+const c5 = {
+  lat: -20.0879,
+  lng: 118.548,
+};
+
 describe('calculateDistance', () => {
   it('should return a number', () => {
     expect(typeof calculateDistance(c1, c2)).toBe('number');
@@ -79,5 +88,12 @@ describe('calculateNextPoint', () => {
     expect(Math.round(calculated.lng * 10)).toBeLessThanOrEqual(
       Math.round(c2.lng * 10) + 1,
     );
+  });
+  it('should calculate reasonable results', () => {
+    console.log(c1, c2, c3);
+    console.log(calculateBearing(c4, c5));
+    console.log(calculateNextPoint(c4, c5, 9.4));
+    console.log(20 + 8 / 60 + 18 / 3600);
+    // const calculated = calculateNextPoint()
   });
 });

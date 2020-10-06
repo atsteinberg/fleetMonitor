@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   GoogleMap,
   InfoWindow,
@@ -9,10 +9,73 @@ import {
 import { Ship } from '../../types/ShipInterface';
 import { Row } from 'react-table';
 
+// for testing purposes
+import { Route } from '../Route/Route';
+import { calculateFuturePositions } from '../../services/routeService';
+const data2 = [
+  '255806176',
+  'AU PHE',
+  '309',
+  'TIANJIN',
+  'CNTXG',
+  '2020-09-21T00:50:00',
+  '282',
+  'PORT HEDLAND',
+  'AUPHE',
+  '2020-10-05T00:00:00',
+  '2020-10-05T00:18:00',
+  '3466',
+  '320',
+  '108',
+  '67',
+  '89',
+  'PARTIALLY_LADEN',
+  'LINESTRING (118.11 -18.60560, 118.447 -19.8958, 118.527 -20.0252, 118.548 -20.0879, 118.557 -20.2228)',
+];
+
+const data = [
+  '218522000',
+  'SG SIN PEBGA',
+  '17428',
+  'LUSHUN',
+  'CNLSH',
+  '2020-10-03T07:17:00',
+  '290',
+  'SINGAPORE',
+  'SGSIN',
+  '2020-10-10T01:00:00',
+  '2020-10-09T17:48:00',
+  '112',
+  '2612',
+  '176',
+  '68',
+  '82',
+  'PARTIALLY_LADEN',
+  'LINESTRING (122.66 37.8804, 123.416 37.2, 123.945 36.0785, 124.049 33.6554, 123.998 29.8453, 122.888 26.4035, 121.734 22.8079, 120.055 20.6084, 118.031 18.3973, 115.398 15.4072, 113.176 12.6598, 110.939 10.441, 109.478 8.5784, 105.207 3.0686, 104.592 1.5568, 104.321 1.3099, 104.158 1.2871, 103.997 1.2608, 103.841 1.1935)',
+];
+const voyage = new VoyageInfo(data2);
+const route = voyage.route;
+console.log(voyage);
+// enrich route with port info
+
+const destinationPort = {
+  lat: -20.3165,
+  lng: 118.576,
+};
+const startPort = {
+  lat: 38.96904,
+  lng: 117.73725,
+};
+route.push(destinationPort);
+route.unshift(startPort);
+
+// end test stuff
+
 import bbcIcon from './bbcicon.png';
 import belugaIcon from './belugaicon.png';
 import salIcon from './salicon.png';
 import uhlIcon from './uhlicon.png';
+import { VoyageInfo } from '../../types/apiDefs';
 
 const containerStyle = {
   width: '100%',
@@ -46,6 +109,12 @@ export const MapComponent: React.FC<MapComponentProps> = ({
   const [infoOpen, setInfoOpen] = useState(false);
   const [map, setMap] = useState<google.maps.Map | null>(null);
   const [clicked, setClicked] = useState<ClickedEntry>({});
+  const [positions, setPositions] = useState({});
+
+  useEffect(() => {
+    setPositions(calculateFuturePositions(voyage));
+    console.log(calculateFuturePositions(voyage));
+  }, []);
 
   const markerLoadHandler = (marker: google.maps.Marker, ship: Row<Ship>) => {
     setClicked((prevState) => ({ ...prevState, [ship.id]: false }));
@@ -158,6 +227,7 @@ export const MapComponent: React.FC<MapComponentProps> = ({
                 </div>
               </InfoWindow>
             )}
+            <Route route={positions} />
           </GoogleMap>
         </LoadScript>
       </div>

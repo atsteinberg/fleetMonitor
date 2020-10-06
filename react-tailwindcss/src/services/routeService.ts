@@ -10,6 +10,7 @@ export function calculateFuturePositions(
   data: VoyageInfo,
   step = 60,
 ): any {
+  debugger;
   const futurePositions: any = {};
 
   const distancePerStep = (data.speedCalc * step) / 60;
