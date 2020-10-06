@@ -5,8 +5,8 @@ export function calculateFuturePositions(
   // we will have a systematic error here, since port locations are
   // not always available. Instead of calculating from the port of arrival
   // we will start calculating estimated position at the last way point
-  step = 60,
   data: VoyageInfo,
+  step = 60,
 ): Positions {
   const futurePositions: Positions = {};
   const distancePerStep = (data.speedCalc * step) / 60;
