@@ -5,13 +5,17 @@ interface IShip {
   mmsi: number;
   type: string;
   owner: string;
-  position: Array<Position>;
+  position: {
+    update: {
+      [time: string]: Update;
+    };
+  };
 }
 
-declare interface Position {
+interface Update {
   lat: number;
   lng: number;
-  updated: string;
+  time: string;
 }
 
 interface ShipModelInterface extends mongoose.Model<ShipDoc> {
@@ -23,14 +27,22 @@ interface ShipDoc extends mongoose.Document {
   mmsi: number;
   type: string;
   owner: string;
-  position: Array<PositionDoc>;
+  position: {
+    [time: string]: Update;
+  };
 }
 
-interface PositionDoc extends mongoose.Document {
-  lat: number;
-  lng: number;
-  updated: string;
-}
+// interface PositionDoc extends mongoose.Document {
+//   position: {
+//     [time: string]: Update;
+//   };
+// }
+
+// interface UpdateDoc extends mongoose.Document {
+//   lat: number;
+//   lng: number;
+//   time: string;
+// }
 
 const shipSchema = new mongoose.Schema({
   shipName: {
@@ -49,13 +61,9 @@ const shipSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  position: [
-    {
-      lat: Number,
-      lng: Number,
-      updated: String,
-    },
-  ],
+  position: {
+    type: [mongoose.Schema.Types.Mixed],
+  },
 });
 
 shipSchema.statics.build = (attr: IShip) => {
@@ -64,42 +72,3 @@ shipSchema.statics.build = (attr: IShip) => {
 const Ship = mongoose.model<ShipDoc, ShipModelInterface>('Ship', shipSchema);
 
 export { Ship };
-
-// interface Position {
-//   lat: number;
-//   lng: number;
-//   update: string;
-// }
-
-// interface IShip {
-//   shipName: string;
-//   mmsi: number;
-//   type: string;
-//   owner: string;
-//   position: Position[];
-// }
-
-// // Ship.build({
-//   shipName: 'Hanna',
-//   mmsi: 255805770,
-//   type: '19000t 2x400t 17kn',
-//   owner: 'UHL',
-//   lat: 54.427599,
-//   lng: 3.935018,
-//   updated: 'mock',
-// });
-
-// const positionSchema = new mongoose.Schema({
-//   lat: {
-//     type: Number,
-//     required: true,
-//   },
-//   lng: {
-//     type: Number,
-//     required: true,
-//   },
-//   updated: {
-//     type: String,
-//     required: true,
-//   },
-// });

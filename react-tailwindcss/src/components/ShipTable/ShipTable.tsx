@@ -12,6 +12,11 @@ import { ShipsState } from '../../types/redux';
 import { DefaultColumnFilter } from '../DefaultColumnFilter/DefaultColumnFilter';
 import { SelectColumnFilter } from '../SelectColumnFilter/SelectColumnFilter';
 import { Ship } from '../../types/ShipInterface';
+import MaUTable from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
 
 type ShipTableProps = {
   setRows: (rows: Row<Ship>[]) => void;
@@ -117,10 +122,10 @@ function ShipTable({ setRows }: ShipTableProps) {
   }, [rows]);
 
   return (
-    <table {...getTableProps()}>
-      <thead>
+    <MaUTable {...getTableProps()}>
+      <TableHead>
         {headerGroups.map((headerGroup) => (
-          <tr {...headerGroup.getHeaderGroupProps()} key="headers">
+          <TableRow {...headerGroup.getHeaderGroupProps()} key="headers">
             {headerGroup.headers.map((column) => {
               const {
                 render,
@@ -148,30 +153,30 @@ function ShipTable({ setRows }: ShipTableProps) {
                 </th>
               );
             })}
-          </tr>
+          </TableRow>
         ))}
-      </thead>
-      <tbody {...getTableBodyProps()} data-testid="table-body">
+      </TableHead>
+      <TableBody {...getTableBodyProps()} data-testid="table-body">
         {rows.map((row) => {
           prepareRow(row);
           return (
-            <tr {...row.getRowProps()} key={row.id}>
+            <TableRow {...row.getRowProps()} key={row.id}>
               {row.cells.map((cell) => {
                 return (
-                  <td
+                  <TableCell
                     {...cell.getCellProps()}
                     key={'row' + cell.row.id + '-' + cell.column.Header}
                     data-testid={'row' + cell.row.id + '-' + cell.column.Header}
                   >
                     {cell.render('Cell')}
-                  </td>
+                  </TableCell>
                 );
               })}
-            </tr>
+            </TableRow>
           );
         })}
-      </tbody>
-    </table>
+      </TableBody>
+    </MaUTable>
   );
 }
 
