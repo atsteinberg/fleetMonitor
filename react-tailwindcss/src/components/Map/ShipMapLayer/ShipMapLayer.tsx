@@ -3,10 +3,10 @@ import React, { useState } from 'react';
 import { Row } from 'react-table';
 import { Ship } from '../../../types/ShipInterface';
 
-import bbcIcon from '../../assets/bbcicon.png';
-import belugaIcon from '../../assets/belugaicon.png';
-import salIcon from '../../assets/salicon.png';
-import uhlIcon from '../../assets/uhlicon.png';
+import bbcIcon from '../../../assets/bbcicon.png';
+import belugaIcon from '../../../assets/belugaicon.png';
+import salIcon from '../../../assets/salicon.png';
+import uhlIcon from '../../../assets/uhlicon.png';
 
 interface MapEntry {
   [id: string]: google.maps.Marker;

@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, cleanup } from '@testing-library/react';
 // import { ps07, vi01, ships } from './__mocks__/@fleetSpy/transmarine.mjs';
-import ShipTable from '../components/ShipTable/ShipTable';
+import ShipTable from '../components/Table/ShipTable/ShipTable';
 import { Provider } from 'react-redux';
 import reducer from '../reducer';
 import { createStore } from 'redux';

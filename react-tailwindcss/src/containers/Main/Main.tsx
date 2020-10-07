@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Row } from 'react-table';
-import MapComponent from '../../components/MapComponent/MapComponent';
-import ShipTable from '../../components/ShipTable/ShipTable';
+import MapComponent from '../../components/Map/MapComponent/MapComponent';
+import ShipTable from '../../components/Table/ShipTable/ShipTable';
 import UpdateButton from '../../components/UpdateButton/UpdateButton';
 import { Ship } from '../../types/ShipInterface';
 
