@@ -1,6 +1,5 @@
 import { InfoWindow } from '@react-google-maps/api';
 import React, { useState } from 'react';
-import { Row } from 'react-table';
 import { Ship } from '../../../types/ShipInterface';
 import { ShipMarker } from '../ShipMarker/ShipMarker';
 
@@ -13,7 +12,7 @@ export interface ClickedEntry {
 }
 
 interface ShipMapLayerProps {
-  ships: Row<Ship>[];
+  ships: Ship[];
   map: google.maps.Map | null;
 }
 
@@ -36,8 +35,8 @@ export const ShipMapLayer: React.FC<ShipMapLayerProps> = ({
   const [clicked, setClicked] = useState<ClickedEntry>({});
   const shipsMarker = ships.map((ship) => (
     <ShipMarker
-      key={ship.original.mmsi}
-      ship={ship.original}
+      key={ship.mmsi}
+      ship={ship}
       setClicked={setClicked}
       setMarkerMap={setMarkerMap}
       setSelectedMarker={setSelectedMarker}

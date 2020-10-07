@@ -7,3 +7,13 @@ export interface Ship {
   lng: number;
   updated: boolean | string;
 }
+
+export interface PointInHistory {
+  time: number;
+  ships: Ship[];
+}
+
+export interface History {
+  previousStates: PointInHistory[];
+  futureStates: PointInHistory[];
+}
