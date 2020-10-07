@@ -1,6 +1,6 @@
 export interface Ship {
   shipName: string;
-  mmsi: number;
+  mmsi: string;
   type: string;
   owner: string;
   lat: number;

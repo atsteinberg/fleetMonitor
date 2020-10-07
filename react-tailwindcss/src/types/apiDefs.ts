@@ -12,7 +12,7 @@ export interface LatLng {
 }
 
 export class VoyageInfo {
-  mmsi: number;
+  mmsi: string;
   destination: string;
   lastPortId: string;
   lastPortName: string;
@@ -51,7 +51,7 @@ export class VoyageInfo {
     loadStatusName,
     route,
   ]: string[]) {
-    this.mmsi = parseInt(mmsi);
+    this.mmsi = mmsi;
     this.destination = destination;
     this.lastPortId = lastPortId;
     this.lastPortName = lastPortName;

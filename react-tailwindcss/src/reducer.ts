@@ -4,7 +4,7 @@ import { Ship } from './types/ShipInterface';
 const initialShips: Ship[] = [
   {
     shipName: 'Zea Fame',
-    mmsi: 255806176,
+    mmsi: '255806176',
     type: '12000t 2x350t 20kn',
     owner: 'UHL',
     lat: 52.44043,
@@ -13,7 +13,7 @@ const initialShips: Ship[] = [
   },
   {
     shipName: 'Anne_Sofie',
-    mmsi: 218412000,
+    mmsi: '218412000',
     type: '12000t 2x350t 20kn',
     owner: 'SAL',
     lat: 52.44043,
@@ -22,7 +22,7 @@ const initialShips: Ship[] = [
   },
   {
     shipName: 'Regine',
-    mmsi: 218170000,
+    mmsi: '218170000',
     type: '12000t 2x350t 20kn',
     owner: 'SAL',
     lat: 51.497654,
@@ -31,7 +31,7 @@ const initialShips: Ship[] = [
   },
   {
     shipName: 'Trina',
-    mmsi: 218705000,
+    mmsi: '218705000',
     type: '12000t 2x350t 20kn',
     owner: 'SAL',
     lat: 41.377964,
@@ -40,7 +40,7 @@ const initialShips: Ship[] = [
   },
   {
     shipName: 'Frauke',
-    mmsi: 305164000,
+    mmsi: '305164000',
     type: '12000t 2x350t 20kn',
     owner: 'UHL',
     lat: 54.427599,
@@ -49,7 +49,7 @@ const initialShips: Ship[] = [
   },
   {
     shipName: 'Maria',
-    mmsi: 218522000,
+    mmsi: '218522000',
     type: '9000t 2x350t 20kn',
     owner: 'BBC',
     lat: 54.57599,
@@ -58,7 +58,7 @@ const initialShips: Ship[] = [
   },
   {
     shipName: 'Annette',
-    mmsi: 304577000,
+    mmsi: '304577000',
     type: '9000t 2x350t 20kn',
     owner: 'BBC',
     lat: 54.6599,
@@ -67,7 +67,7 @@ const initialShips: Ship[] = [
   },
   {
     shipName: 'Wiebke',
-    mmsi: 218553000,
+    mmsi: '218553000',
     type: '9300t 2x320t 20kn',
     owner: 'BBC',
     lat: 54.769,
@@ -76,7 +76,7 @@ const initialShips: Ship[] = [
   },
   {
     shipName: 'Paula',
-    mmsi: 304010228,
+    mmsi: '304010228',
     type: '9300t 2x320t 20kn',
     owner: 'BBC',
     lat: 54.899,
@@ -85,7 +85,7 @@ const initialShips: Ship[] = [
   },
   {
     shipName: 'Annegret',
-    mmsi: 304081024,
+    mmsi: '304081024',
     type: '9300t 2x320t 20kn',
     owner: 'BBC',
     lat: 54.927599,
@@ -94,7 +94,7 @@ const initialShips: Ship[] = [
   },
   {
     shipName: 'Grietje',
-    mmsi: 304081008,
+    mmsi: '304081008',
     type: '9300t 2x320t 20kn',
     owner: 'BBC',
     lat: 54.137599,
@@ -103,7 +103,7 @@ const initialShips: Ship[] = [
   },
   {
     shipName: 'Annemieke',
-    mmsi: 304080796,
+    mmsi: '304080796',
     type: '9500t 2x275t 20kn',
     owner: 'Beluga',
     lat: 54.247599,
@@ -112,7 +112,7 @@ const initialShips: Ship[] = [
   },
   {
     shipName: 'Calypso',
-    mmsi: 305691000,
+    mmsi: '305691000',
     type: '10000t 2x450t 16kn',
     owner: 'Beluga',
     lat: 54.357599,
@@ -121,7 +121,7 @@ const initialShips: Ship[] = [
   },
   {
     shipName: 'Amoenitas',
-    mmsi: 305621000,
+    mmsi: '305621000',
     type: '10000t 2x450t 16kn',
     owner: 'Beluga',
     lat: 54.467599,
@@ -130,7 +130,7 @@ const initialShips: Ship[] = [
   },
   {
     shipName: 'Imke',
-    mmsi: 229127000,
+    mmsi: '229127000',
     type: '10000t 2x450t 16kn',
     owner: 'Beluga',
     lat: 54.477599,
@@ -139,7 +139,7 @@ const initialShips: Ship[] = [
   },
   {
     shipName: 'Anna',
-    mmsi: 305544000,
+    mmsi: '305544000',
     type: '10000t 2x450t 16kn',
     owner: 'Beluga',
     lat: 54.487599,
@@ -148,7 +148,7 @@ const initialShips: Ship[] = [
   },
   {
     shipName: 'Hilke',
-    mmsi: 305533000,
+    mmsi: '305533000',
     type: '10000t 2x450t 16kn',
     owner: 'Beluga',
     lat: 54.497599,
@@ -157,7 +157,7 @@ const initialShips: Ship[] = [
   },
   {
     shipName: 'Caroline',
-    mmsi: 305480000,
+    mmsi: '305480000',
     type: '10000t 2x450t 16kn',
     owner: 'UHL',
     lat: 54.427599,
@@ -166,7 +166,7 @@ const initialShips: Ship[] = [
   },
   {
     shipName: 'Klara',
-    mmsi: 255805875,
+    mmsi: '255805875',
     type: '19000t 2x400t 17kn',
     owner: 'UHL',
     lat: 54.427599,
@@ -175,7 +175,7 @@ const initialShips: Ship[] = [
   },
   {
     shipName: 'Lisa',
-    mmsi: 255805785,
+    mmsi: '255805785',
     type: '19000t 2x400t 17kn',
     owner: 'UHL',
     lat: 54.427599,
@@ -184,7 +184,7 @@ const initialShips: Ship[] = [
   },
   {
     shipName: 'Hanna',
-    mmsi: 255805770,
+    mmsi: '255805770',
     type: '19000t 2x400t 17kn',
     owner: 'UHL',
     lat: 54.427599,
@@ -193,7 +193,7 @@ const initialShips: Ship[] = [
   },
   {
     shipName: 'Lone',
-    mmsi: 305983000,
+    mmsi: '305983000',
     type: '12500t 2x1000t 20kn',
     owner: 'UHL',
     lat: 54.427599,
@@ -202,7 +202,7 @@ const initialShips: Ship[] = [
   },
   {
     shipName: 'Swenja',
-    mmsi: 211577000,
+    mmsi: '211577000',
     type: '12500t 2x1000t 20kn',
     owner: 'UHL',
     lat: 54.427599,
