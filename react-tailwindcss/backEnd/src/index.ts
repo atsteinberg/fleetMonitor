@@ -4,6 +4,8 @@ import { routerSpy } from './routes/routes';
 import mongoose from 'mongoose';
 
 const app = express();
+const PORT = 3005;
+
 app.use(json());
 app.use(routerSpy);
 
@@ -19,6 +21,6 @@ mongoose.connect(
   },
 );
 
-app.listen(3090, () => {
-  console.log('Server running on port 3090');
+app.listen(PORT, () => {
+  console.log(`Server running at http://localhost:${PORT}`);
 });

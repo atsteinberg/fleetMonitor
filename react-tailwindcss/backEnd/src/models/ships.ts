@@ -32,18 +32,6 @@ interface ShipDoc extends mongoose.Document {
   };
 }
 
-// interface PositionDoc extends mongoose.Document {
-//   position: {
-//     [time: string]: Update;
-//   };
-// }
-
-// interface UpdateDoc extends mongoose.Document {
-//   lat: number;
-//   lng: number;
-//   time: string;
-// }
-
 const shipSchema = new mongoose.Schema({
   shipName: {
     type: String,
@@ -62,7 +50,7 @@ const shipSchema = new mongoose.Schema({
     required: true,
   },
   position: {
-    type: [mongoose.Schema.Types.Mixed],
+    type: mongoose.Schema.Types.Mixed,
   },
 });
 

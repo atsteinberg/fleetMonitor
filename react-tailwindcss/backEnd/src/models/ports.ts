@@ -3,8 +3,8 @@ import mongoose from 'mongoose';
 interface IPort {
   name: string;
   city: string;
-  contry: string;
-  alias: [];
+  country: string;
+  alias: string[];
   regions: [];
   coordinates: number[];
   province: string;
@@ -20,8 +20,8 @@ interface PortModelInterface extends mongoose.Model<PortDoc> {
 interface PortDoc extends mongoose.Document {
   name: string;
   city: string;
-  contry: string;
-  alias: [];
+  country: string;
+  alias: string[];
   regions: [];
   coordinates: number[];
   province: string;
@@ -33,13 +33,15 @@ interface PortDoc extends mongoose.Document {
 const portSchema = new mongoose.Schema({
   name: String,
   city: String,
-  contry: String,
-  alias: Array,
-  regions: Array,
-  coordinates: Array,
+  country: String,
+  alias: [String],
+  regions: [String],
+  coordinates: {
+    type: Array,
+  },
   province: String,
   timezone: String,
-  unlocs: Array,
+  unlocs: [String],
   code: Number,
 });
 
