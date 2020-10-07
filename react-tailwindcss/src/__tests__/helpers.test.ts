@@ -13,8 +13,8 @@ const c1 = route[0];
 const c2 = route[1];
 const c3 = route[2];
 const dist1 = 147.8;
-const bearing1 = 166 + 12 / 60 + 10 / 3600;
-const bearing2 = 329 + 49 / 60 + 32 / 3600;
+const bearing1 = (166 + 12 / 60 + 10 / 3600) * (Math.PI / 180);
+const bearing2 = (-31 - 10 / 60 - 28 / 3600) * (Math.PI / 180);
 
 const c4 = {
   lat: -20.2228,
@@ -27,8 +27,8 @@ const c5 = {
 
 function approximateCoordinate(coordinate: LatLng): LatLng {
   const c = { lat: 0, lng: 0 };
-  c.lat = Math.floor(coordinate.lat * 100);
-  c.lng = Math.floor(coordinate.lng * 100);
+  c.lat = Math.round(coordinate.lat * 100);
+  c.lng = Math.round(coordinate.lng * 100);
   return c;
 }
 
@@ -83,23 +83,26 @@ describe('calculateNextPoint', () => {
   });
   it('should return approximately the end coordinate if applied with the distance from start to end', () => {
     const calculated = calculateNextPoint(c1, c2, calculateDistance(c1, c2));
-    expect(Math.round(calculated.lat * 10)).toBeGreaterThanOrEqual(
-      Math.round(c2.lat * 10) - 1,
-    );
-    expect(Math.round(calculated.lat * 10)).toBeLessThanOrEqual(
-      Math.round(c2.lat * 10) + 1,
-    );
-    expect(Math.round(calculated.lng * 10)).toBeGreaterThanOrEqual(
-      Math.round(c2.lng * 10) - 1,
-    );
-    expect(Math.round(calculated.lng * 10)).toBeLessThanOrEqual(
-      Math.round(c2.lng * 10) + 1,
+    // expect(Math.round(calculated.lat * 10)).toBeGreaterThanOrEqual(
+    //   Math.round(c2.lat * 10) - 1,
+    // );
+    // expect(Math.round(calculated.lat * 10)).toBeLessThanOrEqual(
+    //   Math.round(c2.lat * 10) + 1,
+    // );
+    // expect(Math.round(calculated.lng * 10)).toBeGreaterThanOrEqual(
+    //   Math.round(c2.lng * 10) - 1,
+    // );
+    // expect(Math.round(calculated.lng * 10)).toBeLessThanOrEqual(
+    //   Math.round(c2.lng * 10) + 1,
+    // );
+    expect(approximateCoordinate(calculated)).toMatchObject(
+      approximateCoordinate(c2),
     );
   });
-  it('should calculate reasonable results', () => {
+  it('should calculate approximate actual results', () => {
     const calculatedFirstWaypoint = calculateNextPoint(c4, c5, 9.4);
     const actualFirstWaypoint = {
-      lat: -20.1386,
+      lat: -20.1383,
       lng: 118.5514,
     };
     expect(approximateCoordinate(calculatedFirstWaypoint)).toMatchObject(
