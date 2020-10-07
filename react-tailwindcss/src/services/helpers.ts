@@ -1,4 +1,4 @@
-// all of these are taken from https://www.movable-type.co.uk/scripts/latlong.html
+// all of these are lifted from https://www.movable-type.co.uk/scripts/latlong.html
 import { LatLng } from '../types/apiDefs';
 
 export function calculateDistance(
@@ -37,19 +37,21 @@ export function calculateBearing(
     Math.cos(φ1) * Math.sin(φ2) -
     Math.sin(φ1) * Math.cos(φ2) * Math.cos(λ2 - λ1);
   const θ = Math.atan2(y, x);
-  return ((θ * 180) / Math.PI + 360) % 360; // in degrees
+  return θ;
+  // return ((θ * 180) / Math.PI + 360) % 360; // in degrees
 }
 
 export function calculateNextPoint(
-  previous: { lat: number; lng: number },
-  wayPoint: { lat: number; lng: number },
+  // expects current and target coordinate in signed degs and distance in km
+  current: { lat: number; lng: number },
+  target: { lat: number; lng: number },
   distance: number,
 ): LatLng {
-  const d = distance * 1000;
-  const brng = calculateBearing(previous, wayPoint);
+  const d = distance * 1e3;
+  const brng = calculateBearing(current, target);
   const R = 6371e3;
-  const φ1 = (previous.lat * Math.PI) / 180;
-  const λ1 = (previous.lng * Math.PI) / 180;
+  const φ1 = (current.lat / 180) * Math.PI;
+  const λ1 = (current.lng * Math.PI) / 180;
   const φ2 = Math.asin(
     Math.sin(φ1) * Math.cos(d / R) +
       Math.cos(φ1) * Math.sin(d / R) * Math.cos(brng),
