@@ -19,15 +19,15 @@ route.unshift(startPort);
 
 const plottedInitialRoute = {
   1601857080000: {
-    lat: -20.3165,
-    lng: 118.576,
+    lat: -20.3,
+    lng: 118.6,
   },
   1601853480000: {
     lat: -20.1386,
     lng: 118.5514,
   },
   1601849880000: {
-    lat: -19.97,
+    lat: -19.9,
     lng: 118.4928,
   },
   1601846280000: {
@@ -43,7 +43,7 @@ const plottedInitialRoute = {
     lng: 118.3311,
   },
   1601835480000: {
-    lat: -19.2803,
+    lat: -19.2,
     lng: 118.286,
   },
 };
@@ -53,8 +53,8 @@ function approximate(positions: Positions): Positions {
   const keys = Object.keys(positions);
   for (const key of keys) {
     approximatePositions[key] = {
-      lat: Math.floor(positions[key].lat * 10),
-      lng: Math.floor(positions[key].lng * 10),
+      lat: Math.round(positions[key].lat * 10),
+      lng: Math.round(positions[key].lng * 10),
     };
   }
   return approximatePositions;
