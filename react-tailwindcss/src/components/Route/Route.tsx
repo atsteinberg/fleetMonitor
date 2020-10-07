@@ -12,11 +12,7 @@ export const Route: React.FC<RouteProps> = ({ route }) => {
     console.log(pos);
     return (
       <>
-        <Marker
-          position={{ lat: pos.lat, lng: pos.lng }}
-          key={pos.stepNr}
-          label={pos.stepNr.toString()}
-        />
+        <Marker position={{ lat: pos.lat, lng: pos.lng }} key={pos.lat} />
       </>
     );
   });

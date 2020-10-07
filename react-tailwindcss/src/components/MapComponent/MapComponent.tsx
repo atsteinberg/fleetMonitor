@@ -53,7 +53,7 @@ const data = [
   'PARTIALLY_LADEN',
   'LINESTRING (122.66 37.8804, 123.416 37.2, 123.945 36.0785, 124.049 33.6554, 123.998 29.8453, 122.888 26.4035, 121.734 22.8079, 120.055 20.6084, 118.031 18.3973, 115.398 15.4072, 113.176 12.6598, 110.939 10.441, 109.478 8.5784, 105.207 3.0686, 104.592 1.5568, 104.321 1.3099, 104.158 1.2871, 103.997 1.2608, 103.841 1.1935)',
 ];
-const voyage = new VoyageInfo(data2);
+const voyage = new VoyageInfo(data);
 const route = voyage.route;
 console.log(voyage);
 // enrich route with port info
@@ -66,8 +66,8 @@ const startPort = {
   lat: 38.96904,
   lng: 117.73725,
 };
-route.push(destinationPort);
-route.unshift(startPort);
+// route.push(destinationPort);
+// route.unshift(startPort);
 
 // end test stuff
 
