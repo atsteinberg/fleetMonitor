@@ -3,7 +3,7 @@ import {
   calculateBearing,
   calculateNextPoint,
 } from '../services/helpers';
-import { VoyageInfo } from '../types/apiDefs';
+import { LatLng, VoyageInfo } from '../types/apiDefs';
 
 import { mocks } from '../../__mocks__/@fleetSpy/transmarine';
 
@@ -24,6 +24,13 @@ const c5 = {
   lat: -20.0879,
   lng: 118.548,
 };
+
+function approximateCoordinate(coordinate: LatLng): LatLng {
+  const c = { lat: 0, lng: 0 };
+  c.lat = Math.floor(coordinate.lat * 100);
+  c.lng = Math.floor(coordinate.lng * 100);
+  return c;
+}
 
 describe('calculateDistance', () => {
   it('should return a number', () => {
@@ -90,10 +97,13 @@ describe('calculateNextPoint', () => {
     );
   });
   it('should calculate reasonable results', () => {
-    console.log(c1, c2, c3);
-    console.log(calculateBearing(c4, c5));
-    console.log(calculateNextPoint(c4, c5, 9.4));
-    console.log(20 + 8 / 60 + 18 / 3600);
-    // const calculated = calculateNextPoint()
+    const calculatedFirstWaypoint = calculateNextPoint(c4, c5, 9.4);
+    const actualFirstWaypoint = {
+      lat: -20.1386,
+      lng: 118.5514,
+    };
+    expect(approximateCoordinate(calculatedFirstWaypoint)).toMatchObject(
+      approximateCoordinate(actualFirstWaypoint),
+    );
   });
 });
