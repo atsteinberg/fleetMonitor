@@ -1,4 +1,4 @@
-import { VoyageInfo } from '../apiDefs';
+import { VoyageInfo } from '../types/apiDefs';
 const voyage = [
   '255806176',
   'AU PHE',
@@ -25,24 +25,24 @@ const routeString =
 
 const route = [
   {
-    lat: 118.11,
-    lng: -18.6056,
+    lng: 118.11,
+    lat: -18.6056,
   },
   {
-    lat: 118.447,
-    lng: -19.8958,
+    lng: 118.447,
+    lat: -19.8958,
   },
   {
-    lat: 118.527,
-    lng: -20.0252,
+    lng: 118.527,
+    lat: -20.0252,
   },
   {
-    lat: 118.548,
-    lng: -20.0879,
+    lng: 118.548,
+    lat: -20.0879,
   },
   {
-    lat: 118.557,
-    lng: -20.2228,
+    lng: 118.557,
+    lat: -20.2228,
   },
 ];
 
@@ -52,38 +52,38 @@ const voyageObject = {
   lastPortId: '309',
   lastPortName: 'TIANJIN',
   lastPortUnlocode: 'CNTXG',
-  lastPortTime: new Date('2020-09-21T00:50:00'),
+  lastPortTime: new Date('2020-09-21T00:50:00Z'),
   nexPortId: '282',
   nextPortName: 'PORT HEDLAND',
   nextPortUnlocode: 'AUPHE',
-  eta: new Date('2020-10-05T00:00:00'),
-  etaCalc: new Date('2020-10-05T00:18:00'),
-  distanceTravelled: 3466,
-  distanceToGo: 320,
-  speedCalc: 10.8,
+  eta: new Date('2020-10-05T00:00:00Z'),
+  etaCalc: new Date('2020-10-05T00:18:00Z'),
+  distanceTravelled: 3466 * 1.852,
+  distanceToGo: 320 * 1.852,
+  speedCalc: 10.8 * 1.852,
   draught: 67,
   draughtMax: 89,
   loadStatusName: 'PARTIALLY_LADEN',
   route: [
     {
-      lat: 118.11,
-      lng: -18.6056,
+      lng: 118.11,
+      lat: -18.6056,
     },
     {
-      lat: 118.447,
-      lng: -19.8958,
+      lng: 118.447,
+      lat: -19.8958,
     },
     {
-      lat: 118.527,
-      lng: -20.0252,
+      lng: 118.527,
+      lat: -20.0252,
     },
     {
-      lat: 118.548,
-      lng: -20.0879,
+      lng: 118.548,
+      lat: -20.0879,
     },
     {
-      lat: 118.557,
-      lng: -20.2228,
+      lng: 118.557,
+      lat: -20.2228,
     },
   ],
 };
@@ -91,6 +91,7 @@ const voyageObject = {
 describe('constructor', () => {
   it('should create new voyage object instance from array', () => {
     const myVoyage = new VoyageInfo(voyage);
+    expect(myVoyage).toBeInstanceOf(VoyageInfo);
     expect(myVoyage).toMatchObject(voyageObject);
   });
 });
@@ -101,3 +102,4 @@ describe('parse', () => {
     expect(myRoute).toStrictEqual(route);
   });
 });
+// TODO: check that routes are parsed correctly (mapping lats to lat and lngs to lat)

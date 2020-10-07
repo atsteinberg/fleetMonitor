@@ -1,5 +1,5 @@
 import { readFileSync } from 'fs';
-import { act } from 'react-testing-library';
+import { act } from '@testing-library/react';
 
 const _ships = [
   {
@@ -224,16 +224,18 @@ const _vi01 = JSON.parse(
   ),
 );
 
-export const mock = {
-  ps07: jest.fn(() => {
+export const mocks = {
+  ps07Async: jest.fn(() => {
     return {
-      then: (callback) => act(() => callback(_ps07)),
+      then: (callback: any) => act(() => callback(_ps07)),
     };
   }),
-  vi07: jest.fn(() => {
+  vi07Async: jest.fn(() => {
     return {
-      then: (callback) => act(() => callback(_vi01)),
+      then: (callback: any) => act(() => callback(_vi01)),
     };
   }),
+  ps07: _ps07,
+  vi01: _vi01,
   ships: _ships,
 };
