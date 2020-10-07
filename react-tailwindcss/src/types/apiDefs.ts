@@ -1,6 +1,6 @@
 export interface Positions {
-  [time: number]: {
-    time: Date;
+  [time: string]: {
+    time?: Date;
     lat: number;
     lng: number;
   };
