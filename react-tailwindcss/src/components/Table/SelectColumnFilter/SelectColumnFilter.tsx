@@ -1,6 +1,6 @@
 import React from 'react';
 import { FilterProps } from 'react-table';
-import { Ships } from '../../types/redux';
+import { Ships } from '../../../types/redux';
 
 export function SelectColumnFilter({
   column: { filterValue, preFilteredRows, setFilter, id },

@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { GoogleMap, LoadScript } from '@react-google-maps/api';
-import { Ship } from '../../types/ShipInterface';
+import { Ship } from '../../../types/ShipInterface';
 import { Row } from 'react-table';
 import { ShipMapLayer } from '../ShipMapLayer/ShipMapLayer';
 

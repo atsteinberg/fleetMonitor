@@ -1,7 +1,7 @@
 import { InfoWindow, Marker } from '@react-google-maps/api';
 import React, { useState } from 'react';
 import { Row } from 'react-table';
-import { Ship } from '../../types/ShipInterface';
+import { Ship } from '../../../types/ShipInterface';
 
 import bbcIcon from '../../assets/bbcicon.png';
 import belugaIcon from '../../assets/belugaicon.png';

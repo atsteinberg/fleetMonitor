@@ -8,10 +8,10 @@ import {
 } from 'react-table';
 import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { ShipsState } from '../../types/redux';
+import { ShipsState } from '../../../types/redux';
 import { DefaultColumnFilter } from '../DefaultColumnFilter/DefaultColumnFilter';
 import { SelectColumnFilter } from '../SelectColumnFilter/SelectColumnFilter';
-import { Ship } from '../../types/ShipInterface';
+import { Ship } from '../../../types/ShipInterface';
 import MaUTable from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';

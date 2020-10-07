@@ -1,6 +1,6 @@
 import { InfoWindow, Marker } from '@react-google-maps/api';
 import React from 'react';
-import { Positions } from '../../types/apiDefs';
+import { Positions } from '../../../types/apiDefs';
 
 interface RouteProps {
   route: Positions;
