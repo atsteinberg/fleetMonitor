@@ -147,7 +147,12 @@ export const MapComponent: React.FC<MapComponentProps> = ({
             onLoad={loadHandler}
             onUnmount={unmountHandler}
           >
-            <ShipMapLayer map={map} ships={pointInHistory.ships} />
+            <ShipMapLayer
+              map={map}
+              ships={pointInHistory.ships.filter((ship) =>
+                rows.some((entry) => entry.original.mmsi === ship.mmsi),
+              )}
+            />
           </GoogleMap>
         </LoadScript>
       </div>
