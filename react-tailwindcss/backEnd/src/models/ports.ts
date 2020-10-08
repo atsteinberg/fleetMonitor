@@ -2,15 +2,8 @@ import mongoose from 'mongoose';
 
 interface IPort {
   name: string;
-  city: string;
-  country: string;
-  alias: string[];
-  regions: [];
-  coordinates: number[];
-  province: string;
-  timezone: string;
+  coordinates?: number[];
   unlocs: string[];
-  code: number;
 }
 
 interface PortModelInterface extends mongoose.Model<PortDoc> {
@@ -19,30 +12,14 @@ interface PortModelInterface extends mongoose.Model<PortDoc> {
 
 interface PortDoc extends mongoose.Document {
   name: string;
-  city: string;
-  country: string;
-  alias: string[];
-  regions: [];
-  coordinates: number[];
-  province: string;
-  timezone: string;
+  coordinates?: number[];
   unlocs: string[];
-  code: number;
 }
 
 const portSchema = new mongoose.Schema({
   name: String,
-  city: String,
-  country: String,
-  alias: [String],
-  regions: [String],
-  coordinates: {
-    type: Array,
-  },
-  province: String,
-  timezone: String,
+  coordinates: [Number],
   unlocs: [String],
-  code: Number,
 });
 
 portSchema.statics.build = (attr: IPort) => {
@@ -50,4 +27,6 @@ portSchema.statics.build = (attr: IPort) => {
 };
 const Port = mongoose.model<PortDoc, PortModelInterface>('Port', portSchema);
 
-export { Port };
+// module.exports = mongoose.model('Port', portSchema);
+
+export = Port;

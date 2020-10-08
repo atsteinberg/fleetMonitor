@@ -50,7 +50,7 @@ const shipSchema = new mongoose.Schema({
     required: true,
   },
   position: {
-    type: mongoose.Schema.Types.Mixed,
+    type: [mongoose.Schema.Types.Mixed],
   },
 });
 
