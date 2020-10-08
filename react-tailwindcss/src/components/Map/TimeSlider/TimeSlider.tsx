@@ -1,11 +1,11 @@
 import React from 'react';
 import { Slider } from '@material-ui/core';
 import moment from 'moment';
-import { PointInHistory, History } from '../../../types/ShipInterface';
+import { PointInHistory, ShipHistory } from '../../../types/Ship';
 
 interface TimeSliderProps {
   setPointInHistory: React.Dispatch<React.SetStateAction<PointInHistory>>;
-  history: History;
+  history: ShipHistory;
 }
 
 export const TimeSlider: React.FC<TimeSliderProps> = ({

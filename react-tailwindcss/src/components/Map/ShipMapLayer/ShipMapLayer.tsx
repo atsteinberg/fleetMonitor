@@ -1,6 +1,6 @@
 import { InfoWindow } from '@react-google-maps/api';
 import React, { useState } from 'react';
-import { Ship } from '../../../types/ShipInterface';
+import { ShipTimeslice } from '../../../types/Ship';
 import { ShipMarker } from '../ShipMarker/ShipMarker';
 
 export interface MapEntry {
@@ -12,7 +12,7 @@ export interface ClickedEntry {
 }
 
 interface ShipMapLayerProps {
-  ships: Ship[];
+  ships: ShipTimeslice[];
   map: google.maps.Map | null;
 }
 
@@ -29,7 +29,9 @@ export const ShipMapLayer: React.FC<ShipMapLayerProps> = ({
       };
     });
   };
-  const [selectedMarker, setSelectedMarker] = useState<Ship | null>(null);
+  const [selectedMarker, setSelectedMarker] = useState<ShipTimeslice | null>(
+    null,
+  );
   const [markerMap, setMarkerMap] = useState<MapEntry>({});
   const [infoOpen, setInfoOpen] = useState(false);
   const [clicked, setClicked] = useState<ClickedEntry>({});
@@ -53,7 +55,7 @@ export const ShipMapLayer: React.FC<ShipMapLayerProps> = ({
       onCloseClick={() => handleClose(selectedMarker.mmsi)}
     >
       <div>
-        <h1>Name: {selectedMarker.shipName}</h1>
+        <h1>Name: {selectedMarker.name}</h1>
         <p>Owner: {selectedMarker.owner}</p>
         <p>Type: {selectedMarker.type}</p>
         <p>MMSI: {selectedMarker.mmsi}</p>

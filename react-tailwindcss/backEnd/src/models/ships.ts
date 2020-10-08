@@ -1,12 +1,20 @@
 import mongoose from './index';
 
+const locationSchema = new mongoose.Schema({
+  time: Date,
+  coordinate: {
+    lat: Number,
+    lng: Number,
+  },
+});
+
 const shipSchema = new mongoose.Schema({
   name: {
     type: String,
     required: true,
   },
   mmsi: {
-    type: Number,
+    type: String,
     required: true,
   },
   type: {
@@ -20,18 +28,18 @@ const shipSchema = new mongoose.Schema({
   locations: {
     previousLocations: {
       type: Map,
-      of: String,
+      of: locationSchema,
     },
     futureLocations: {
       type: Map,
-      of: String,
+      of: locationSchema,
     },
   },
 });
 
-const Ship = mongoose.model('Ship', shipSchema);
+const ShipDb = mongoose.model('Ship', shipSchema);
 
-export default Ship;
+export default ShipDb;
 
 // interface IShip {
 //   shipName: string;

@@ -1,15 +1,15 @@
 import { Marker } from '@react-google-maps/api';
 import React, { Dispatch, SetStateAction } from 'react';
-import { Ship } from '../../../types/ShipInterface';
+import { ShipTimeslice } from '../../../types/Ship';
 import { ClickedEntry, MapEntry } from '../ShipMapLayer/ShipMapLayer';
 
 interface ShipMarkerProps {
   map: google.maps.Map | null;
-  ship: Ship;
+  ship: ShipTimeslice;
   setClicked: Dispatch<SetStateAction<ClickedEntry>>;
   clicked: ClickedEntry;
   setMarkerMap: Dispatch<SetStateAction<MapEntry>>;
-  setSelectedMarker: Dispatch<SetStateAction<Ship | null>>;
+  setSelectedMarker: Dispatch<SetStateAction<ShipTimeslice | null>>;
   infoOpen: boolean;
   setInfoOpen: Dispatch<SetStateAction<boolean>>;
 }
@@ -24,7 +24,10 @@ export const ShipMarker: React.FC<ShipMarkerProps> = ({
   clicked,
   map,
 }: ShipMarkerProps) => {
-  const markerLoadHandler = (marker: google.maps.Marker, ship: Ship) => {
+  const markerLoadHandler = (
+    marker: google.maps.Marker,
+    ship: ShipTimeslice,
+  ) => {
     setClicked((prevState: ClickedEntry) => ({
       ...prevState,
       [ship.mmsi]: false,
@@ -34,7 +37,7 @@ export const ShipMarker: React.FC<ShipMarkerProps> = ({
     });
   };
 
-  const markerUnmountHandler = (ship: Ship) => {
+  const markerUnmountHandler = (ship: ShipTimeslice) => {
     setClicked((prevState: ClickedEntry) => ({
       ...prevState,
       [ship.mmsi]: false,
@@ -42,7 +45,7 @@ export const ShipMarker: React.FC<ShipMarkerProps> = ({
     }));
   };
 
-  const toggleClicked = (ship: Ship) => {
+  const toggleClicked = (ship: ShipTimeslice) => {
     setClicked((prevState: ClickedEntry) => {
       return {
         [ship.mmsi]: !prevState[ship.mmsi] ? true : false,
@@ -51,12 +54,12 @@ export const ShipMarker: React.FC<ShipMarkerProps> = ({
     });
   };
 
-  const markerClickHandler = (ship: Ship) => {
+  const markerClickHandler = (ship: ShipTimeslice) => {
     toggleClicked(ship);
     showInfo(ship);
   };
 
-  const showInfo = (ship: Ship) => {
+  const showInfo = (ship: ShipTimeslice) => {
     setSelectedMarker(ship);
     if (infoOpen) {
       setInfoOpen(false);
@@ -64,11 +67,11 @@ export const ShipMarker: React.FC<ShipMarkerProps> = ({
     setInfoOpen(true);
   };
 
-  const markerMouseOverHandler = (ship: Ship) => {
+  const markerMouseOverHandler = (ship: ShipTimeslice) => {
     if (!clicked.global) showInfo(ship);
   };
 
-  const markerMouseOutHandler = (ship: Ship) => {
+  const markerMouseOutHandler = (ship: ShipTimeslice) => {
     if (infoOpen && !clicked[ship.mmsi] && !clicked.global) {
       setInfoOpen(false);
     }
@@ -85,7 +88,10 @@ export const ShipMarker: React.FC<ShipMarkerProps> = ({
   return (
     <Marker
       icon={iconPath}
-      position={{ lat: ship.lat, lng: ship.lng }}
+      position={{
+        lat: ship.location.coordinates.lat,
+        lng: ship.location.coordinates.lng,
+      }}
       onLoad={(marker) => markerLoadHandler(marker, ship)}
       onUnmount={() => markerUnmountHandler(ship)}
       onMouseOver={() => markerMouseOverHandler(ship)}

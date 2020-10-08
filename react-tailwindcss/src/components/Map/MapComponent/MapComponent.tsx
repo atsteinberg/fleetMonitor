@@ -1,9 +1,16 @@
 import React, { useState } from 'react';
 import { GoogleMap, LoadScript } from '@react-google-maps/api';
-import { PointInHistory, Ship } from '../../../types/ShipInterface';
+import {
+  PointInHistory,
+  Ship,
+  ShipHistory,
+  ShipTimeslice,
+} from '../../../types/Ship';
 import { Row } from 'react-table';
 import { ShipMapLayer } from '../ShipMapLayer/ShipMapLayer';
 import { TimeSlider } from '../TimeSlider/TimeSlider';
+import { useSelector } from 'react-redux';
+import { ShipsState } from '../../../types/redux';
 
 const containerStyle = {
   width: '100%',
@@ -16,114 +23,159 @@ type Center = {
 };
 
 interface MapComponentProps {
-  rows: Row<Ship>[];
+  rows: Row<ShipTimeslice>[];
   center: Center;
 }
 
-const history = {
-  previousStates: [
-    {
-      time: Date.now() - 300000000,
-      ships: [
-        {
-          shipName: 'Zea Fame',
-          mmsi: '255806176',
-          type: '12000t 2x350t 20kn',
-          owner: 'UHL',
-          lat: 52.44043,
-          lng: 13.371147,
-          updated: 'mock',
-        },
-        {
-          shipName: 'Anne_Sofie',
-          mmsi: '218412000',
-          type: '12000t 2x350t 20kn',
-          owner: 'SAL',
-          lat: 51.44043,
-          lng: 13.371147,
-          updated: 'mock',
-        },
-      ],
-    },
-    {
-      time: Date.now() - 200000000,
-      ships: [
-        {
-          shipName: 'Zea Fame',
-          mmsi: '255806176',
-          type: '12000t 2x350t 20kn',
-          owner: 'UHL',
-          lat: 52.44043,
-          lng: 13.371147,
-          updated: 'mock',
-        },
-        {
-          shipName: 'Anne_Sofie',
-          mmsi: '218412000',
-          type: '12000t 2x350t 20kn',
-          owner: 'SAL',
-          lat: 51.44043,
-          lng: 13.371147,
-          updated: 'mock',
-        },
-      ],
-    },
-    {
-      time: Date.now() - 20000000,
-      ships: [
-        {
-          shipName: 'Zea Fame',
-          mmsi: '255806176',
-          type: '12000t 2x350t 20kn',
-          owner: 'UHL',
-          lat: 53.44043,
-          lng: 14.371147,
-          updated: 'mock',
-        },
-        {
-          shipName: 'Anne_Sofie',
-          mmsi: '218412000',
-          type: '12000t 2x350t 20kn',
-          owner: 'SAL',
-          lat: 51.44043,
-          lng: 10.371147,
-          updated: 'mock',
-        },
-      ],
-    },
-  ],
-  futureStates: [
-    {
-      time: Date.now() + 1000000,
-      ships: [
-        {
-          shipName: 'Zea Fame',
-          mmsi: '255806176',
-          type: '12000t 2x350t 20kn',
-          owner: 'UHL',
-          lat: 50.44043,
-          lng: 12.371147,
-          updated: 'mock',
-        },
-        {
-          shipName: 'Anne_Sofie',
-          mmsi: '218412000',
-          type: '12000t 2x350t 20kn',
-          owner: 'SAL',
-          lat: 42.44043,
-          lng: 13.371147,
-          updated: 'mock',
-        },
-      ],
-    },
-  ],
-};
+// const history = {
+//   previousStates: [
+//     {
+//       time: Date.now() - 300000000,
+//       ships: [
+//         {
+//           shipName: 'Zea Fame',
+//           mmsi: '255806176',
+//           type: '12000t 2x350t 20kn',
+//           owner: 'UHL',
+//           lat: 52.44043,
+//           lng: 13.371147,
+//           updated: 'mock',
+//         },
+//         {
+//           shipName: 'Anne_Sofie',
+//           mmsi: '218412000',
+//           type: '12000t 2x350t 20kn',
+//           owner: 'SAL',
+//           lat: 51.44043,
+//           lng: 13.371147,
+//           updated: 'mock',
+//         },
+//       ],
+//     },
+//     {
+//       time: Date.now() - 200000000,
+//       ships: [
+//         {
+//           shipName: 'Zea Fame',
+//           mmsi: '255806176',
+//           type: '12000t 2x350t 20kn',
+//           owner: 'UHL',
+//           lat: 52.44043,
+//           lng: 13.371147,
+//           updated: 'mock',
+//         },
+//         {
+//           shipName: 'Anne_Sofie',
+//           mmsi: '218412000',
+//           type: '12000t 2x350t 20kn',
+//           owner: 'SAL',
+//           lat: 51.44043,
+//           lng: 13.371147,
+//           updated: 'mock',
+//         },
+//       ],
+//     },
+//     {
+//       time: Date.now() - 20000000,
+//       ships: [
+//         {
+//           shipName: 'Zea Fame',
+//           mmsi: '255806176',
+//           type: '12000t 2x350t 20kn',
+//           owner: 'UHL',
+//           lat: 53.44043,
+//           lng: 14.371147,
+//           updated: 'mock',
+//         },
+//         {
+//           shipName: 'Anne_Sofie',
+//           mmsi: '218412000',
+//           type: '12000t 2x350t 20kn',
+//           owner: 'SAL',
+//           lat: 51.44043,
+//           lng: 10.371147,
+//           updated: 'mock',
+//         },
+//       ],
+//     },
+//   ],
+//   futureStates: [
+//     {
+//       time: Date.now() + 1000000,
+//       ships: [
+//         {
+//           shipName: 'Zea Fame',
+//           mmsi: '255806176',
+//           type: '12000t 2x350t 20kn',
+//           owner: 'UHL',
+//           lat: 50.44043,
+//           lng: 12.371147,
+//           updated: 'mock',
+//         },
+//         {
+//           shipName: 'Anne_Sofie',
+//           mmsi: '218412000',
+//           type: '12000t 2x350t 20kn',
+//           owner: 'SAL',
+//           lat: 42.44043,
+//           lng: 13.371147,
+//           updated: 'mock',
+//         },
+//       ],
+//     },
+//   ],
+// };
 
 export const MapComponent: React.FC<MapComponentProps> = ({
   rows,
   center,
 }: MapComponentProps) => {
   const [map, setMap] = useState<google.maps.Map | null>(null);
+  const shipData: Ship[] = useSelector((state: ShipsState) => state.ships);
+
+  const history: ShipHistory = { previousStates: [], futureStates: [] };
+
+  shipData.forEach((ship) => {
+    const pastLocations = ship.locations.previousLocations;
+    const futureLocations = ship.locations.futureLocations;
+    pastLocations.forEach((datedLocation) => {
+      if (!history.previousStates[datedLocation.time]) {
+        history.previousStates[datedLocation.time] = {
+          time: datedLocation.time,
+          ships: [],
+        };
+      }
+      history.previousStates[datedLocation.time].ships = [
+        ...history.previousStates[datedLocation.time].ships,
+        {
+          name: ship.name,
+          mmsi: ship.mmsi,
+          type: ship.type,
+          owner: ship.owner,
+          location: datedLocation,
+        },
+      ];
+      futureLocations.forEach((datedLocation) => {
+        if (!history.futureStates[datedLocation.time]) {
+          history.futureStates[datedLocation.time] = {
+            time: datedLocation.time,
+            ships: [],
+          };
+        }
+        history.futureStates[datedLocation.time].ships = [
+          ...history.futureStates[datedLocation.time].ships,
+          {
+            name: ship.name,
+            mmsi: ship.mmsi,
+            type: ship.type,
+            owner: ship.owner,
+            location: datedLocation,
+          },
+        ];
+      });
+    });
+  });
+
   const [pointInHistory, setPointInHistory] = useState<PointInHistory>(
     history.previousStates[history.previousStates.length - 1],
   );
@@ -147,12 +199,12 @@ export const MapComponent: React.FC<MapComponentProps> = ({
             onLoad={loadHandler}
             onUnmount={unmountHandler}
           >
-            <ShipMapLayer
+            {/* <ShipMapLayer
               map={map}
               ships={pointInHistory.ships.filter((ship) =>
                 rows.some((entry) => entry.original.mmsi === ship.mmsi),
               )}
-            />
+            /> */}
           </GoogleMap>
         </LoadScript>
       </div>

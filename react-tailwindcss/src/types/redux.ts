@@ -1,4 +1,4 @@
-import { Ship } from './ShipInterface';
+import { LocationHistory, Ship } from './Ship';
 
 export const POSITION_UPDATE = 'POSITION_UPDATE';
 
@@ -11,7 +11,5 @@ export interface ShipsState {
 export interface UpdateAction {
   type: typeof POSITION_UPDATE;
   index: number;
-  lat: number;
-  lng: number;
-  updated: boolean;
+  locations: LocationHistory;
 }

@@ -11,7 +11,7 @@ import { useSelector } from 'react-redux';
 import { ShipsState } from '../../../types/redux';
 import { DefaultColumnFilter } from '../DefaultColumnFilter/DefaultColumnFilter';
 import { SelectColumnFilter } from '../SelectColumnFilter/SelectColumnFilter';
-import { Ship } from '../../../types/ShipInterface';
+import { Ship, ShipTimeslice } from '../../../types/Ship';
 import MaUTable from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -19,7 +19,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 
 type ShipTableProps = {
-  setRows: (rows: Row<Ship>[]) => void;
+  setRows: (rows: Row<ShipTimeslice>[]) => void;
 };
 
 const EmptyDiv: React.FC<unknown> = () => <div></div>;
@@ -27,13 +27,29 @@ const EmptyDiv: React.FC<unknown> = () => <div></div>;
 function ShipTable({ setRows }: ShipTableProps) {
   const shipData: Ship[] = useSelector((state: ShipsState) => state.ships);
 
-  const data = React.useMemo<Ship[]>(() => shipData, [shipData]);
+  const currentShipState = shipData.map((ship) => {
+    const lastKnownLocation =
+      ship.locations.previousLocations[
+        ship.locations.previousLocations.length - 1
+      ];
+    return {
+      ...ship,
+      location: {
+        time: lastKnownLocation.time,
+        coordinates: lastKnownLocation.coordinates,
+      },
+    };
+  });
 
-  const columns = React.useMemo<Column<Ship>[]>(
+  const data = React.useMemo<ShipTimeslice[]>(() => currentShipState, [
+    currentShipState,
+  ]);
+
+  const columns = React.useMemo<Column<ShipTimeslice>[]>(
     () => [
       {
         Header: 'Ship Name',
-        accessor: 'shipName',
+        accessor: 'name',
       },
       {
         Header: 'MMSI #',
@@ -54,19 +70,19 @@ function ShipTable({ setRows }: ShipTableProps) {
       },
       {
         Header: 'Latitude',
-        accessor: 'lat',
+        accessor: (ship) => ship.location.coordinates.lat,
         Filter: <EmptyDiv />,
         filter: 'includes',
       },
       {
         Header: 'Longitude',
-        accessor: 'lng',
+        accessor: (ship) => ship.location.coordinates.lng,
         Filter: <EmptyDiv />,
         filter: 'includes',
       },
       {
         Header: 'updated',
-        accessor: 'updated',
+        accessor: (ship) => ship.location.time,
         Filter: <EmptyDiv />,
         filter: 'includes',
       },
@@ -83,7 +99,7 @@ function ShipTable({ setRows }: ShipTableProps) {
 
   const filterTypes = React.useMemo(
     () => ({
-      text: (rows: Row<Ship>[], id: string, filterValue: string) => {
+      text: (rows: Row<ShipTimeslice>[], id: string, filterValue: string) => {
         return rows.filter((row) => {
           const rowValue = row.values[id];
           return rowValue !== undefined
@@ -97,7 +113,7 @@ function ShipTable({ setRows }: ShipTableProps) {
     [],
   );
 
-  const tableInstance = useTable<Ship>(
+  const tableInstance = useTable<ShipTimeslice>(
     {
       columns,
       data,
