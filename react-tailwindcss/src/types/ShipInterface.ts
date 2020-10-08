@@ -6,6 +6,7 @@ export interface Ship {
   lat: number;
   lng: number;
   updated: boolean | string;
+  history?: ShipHistory;
 }
 
 export interface PointInHistory {
@@ -13,7 +14,7 @@ export interface PointInHistory {
   ships: Ship[];
 }
 
-export interface History {
+export interface ShipHistory {
   previousStates: PointInHistory[];
   futureStates: PointInHistory[];
 }
