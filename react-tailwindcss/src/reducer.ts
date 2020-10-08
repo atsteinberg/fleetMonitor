@@ -2,7 +2,7 @@ import { extractHistory } from './components/Map/MapComponent/helper';
 import { ShipsState, UpdateAction } from './types/redux';
 import { Ship, ShipHistory } from './types/ShipInterface';
 
-const initialShips: Ship[] = [
+const ships: Ship[] = [
   {
     shipName: 'Zea Fame',
     mmsi: '255806176',
@@ -21,7 +21,7 @@ const initialShips: Ship[] = [
           },
         },
         {
-          time: Date.now() - 20000,
+          time: Date.now() - 2000000,
           coordinates: {
             lat: 50,
             lng: 10,
@@ -495,6 +495,8 @@ const initialShips: Ship[] = [
   },
 ];
 
+const initialShips = ships;
+
 export default function (
   state: ShipsState = {
     ships: initialShips,
@@ -507,11 +509,17 @@ export default function (
   switch (action.type) {
     case 'POSITION_UPDATE':
       updatedShips = [...state.ships];
-      updatedShips[action.index] = {
-        ...updatedShips[action.index],
-        lat: action.lat,
-        lng: action.lng,
-      };
+      const shipToUpdate = updatedShips[action.index];
+      if (!shipToUpdate.history) {
+        shipToUpdate.history = {
+          previousLocations: [],
+          futureLocations: [],
+        };
+      }
+      shipToUpdate.history.previousLocations = [
+        ...shipToUpdate.history.previousLocations,
+        action.newDatedCoordinate,
+      ];
 
       return { ships: updatedShips, history: extractHistory(updatedShips) };
 

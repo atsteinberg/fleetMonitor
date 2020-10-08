@@ -12,7 +12,11 @@ export interface ShipsState {
 export interface UpdateAction {
   type: typeof POSITION_UPDATE;
   index: number;
-  lat: number;
-  lng: number;
-  updated: boolean;
+  newDatedCoordinate: {
+    time: number;
+    coordinates: {
+      lat: number;
+      lng: number;
+    };
+  };
 }
