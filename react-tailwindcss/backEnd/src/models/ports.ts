@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+import mongoose from './index';
 
 interface IPort {
   name: string;
