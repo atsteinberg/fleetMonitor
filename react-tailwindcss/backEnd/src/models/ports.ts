@@ -29,4 +29,4 @@ const Port = mongoose.model<PortDoc, PortModelInterface>('Port', portSchema);
 
 // module.exports = mongoose.model('Port', portSchema);
 
-export = Port;
+export default Port;
