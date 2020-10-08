@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { GoogleMap, LoadScript } from '@react-google-maps/api';
 import {
   PointInHistory,
@@ -8,7 +8,6 @@ import {
 import { Row } from 'react-table';
 import { ShipMapLayer } from '../ShipMapLayer/ShipMapLayer';
 import { TimeSlider } from '../TimeSlider/TimeSlider';
-import { extractHistory } from './helper';
 import { useSelector } from 'react-redux';
 import { ShipsState } from '../../../types/redux';
 
@@ -127,7 +126,6 @@ interface MapComponentProps {
 // };
 
 export const MapComponent: React.FC<MapComponentProps> = ({
-  rows,
   center,
 }: MapComponentProps) => {
   // const [history, setHistory] = useState(extractHistory(rows));
