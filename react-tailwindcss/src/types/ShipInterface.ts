@@ -5,7 +5,7 @@ export interface Ship {
   owner: string;
   lat: number;
   lng: number;
-  updated: boolean | string;
+  updated: boolean | string | number;
   history?: ShipHistory;
 }
 
