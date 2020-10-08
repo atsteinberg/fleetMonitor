@@ -1,5 +1,38 @@
 import mongoose from './index';
 
+const shipSchema = new mongoose.Schema({
+  name: {
+    type: String,
+    required: true,
+  },
+  mmsi: {
+    type: Number,
+    required: true,
+  },
+  type: {
+    type: String,
+    required: true,
+  },
+  owner: {
+    type: String,
+    required: true,
+  },
+  locations: {
+    previousLocations: {
+      type: Map,
+      of: String,
+    },
+    futureLocations: {
+      type: Map,
+      of: String,
+    },
+  },
+});
+
+const Ship = mongoose.model('Ship', shipSchema);
+
+export default Ship;
+
 // interface IShip {
 //   shipName: string;
 //   mmsi: number;
@@ -43,39 +76,7 @@ import mongoose from './index';
 //   lng: number;
 //   time: string;
 // }
-
-const shipSchema = new mongoose.Schema({
-  shipName: {
-    type: String,
-    required: true,
-  },
-  mmsi: {
-    type: Number,
-    required: true,
-  },
-  type: {
-    type: String,
-    required: true,
-  },
-  owner: {
-    type: String,
-    required: true,
-  },
-  locations: {
-    previousLocations: {
-      type: Map,
-      of: String,
-    },
-    futureLocations: {
-      type: Map,
-      of: String,
-    },
-  },
-});
-
 // shipSchema.statics.build = (attr: IShip) => {
 //   return new Ship(attr);
 // };
 // const Ship = mongoose.model<ShipDoc, ShipModelInterface>('Ship', shipSchema);
-
-export { Ship };

@@ -3,7 +3,7 @@ import { act } from '@testing-library/react';
 
 const _ships = [
   {
-    shipName: 'Zea Fame',
+    name: 'Zea Fame',
     mmsi: 255806176,
     type: '12000t 2x350t 20kn',
     owner: 'UHL',
@@ -12,7 +12,7 @@ const _ships = [
     updated: 'mock',
   },
   {
-    shipName: 'Anne_Sofie',
+    name: 'Anne_Sofie',
     mmsi: 218412000,
     type: '12000t 2x350t 20kn',
     owner: 'SAL',
@@ -21,7 +21,7 @@ const _ships = [
     updated: 'mock',
   },
   {
-    shipName: 'Regine',
+    name: 'Regine',
     mmsi: 218170000,
     type: '12000t 2x350t 20kn',
     owner: 'SAL',
@@ -30,7 +30,7 @@ const _ships = [
     updated: 'mock',
   },
   {
-    shipName: 'Trina',
+    name: 'Trina',
     mmsi: 218705000,
     type: '12000t 2x350t 20kn',
     owner: 'SAL',
@@ -39,7 +39,7 @@ const _ships = [
     updated: 'mock',
   },
   {
-    shipName: 'Frauke',
+    name: 'Frauke',
     mmsi: 305164000,
     type: '12000t 2x350t 20kn',
     owner: 'UHL',
@@ -48,7 +48,7 @@ const _ships = [
     updated: 'mock',
   },
   {
-    shipName: 'Maria',
+    name: 'Maria',
     mmsi: 218522000,
     type: '9000t 2x350t 20kn',
     owner: 'BBC',
@@ -57,7 +57,7 @@ const _ships = [
     updated: 'mock',
   },
   {
-    shipName: 'Annette',
+    name: 'Annette',
     mmsi: 304577000,
     type: '9000t 2x350t 20kn',
     owner: 'BBC',
@@ -66,7 +66,7 @@ const _ships = [
     updated: 'mock',
   },
   {
-    shipName: 'Wiebke',
+    name: 'Wiebke',
     mmsi: 218553000,
     type: '9300t 2x320t 20kn',
     owner: 'BBC',
@@ -75,7 +75,7 @@ const _ships = [
     updated: 'mock',
   },
   {
-    shipName: 'Paula',
+    name: 'Paula',
     mmsi: 304010228,
     type: '9300t 2x320t 20kn',
     owner: 'BBC',
@@ -84,7 +84,7 @@ const _ships = [
     updated: 'mock',
   },
   {
-    shipName: 'Annegret',
+    name: 'Annegret',
     mmsi: 304081024,
     type: '9300t 2x320t 20kn',
     owner: 'BBC',
@@ -93,7 +93,7 @@ const _ships = [
     updated: 'mock',
   },
   {
-    shipName: 'Grietje',
+    name: 'Grietje',
     mmsi: 304081008,
     type: '9300t 2x320t 20kn',
     owner: 'BBC',
@@ -102,7 +102,7 @@ const _ships = [
     updated: 'mock',
   },
   {
-    shipName: 'Annemieke',
+    name: 'Annemieke',
     mmsi: 304080796,
     type: '9500t 2x275t 20kn',
     owner: 'Beluga',
@@ -111,7 +111,7 @@ const _ships = [
     updated: 'mock',
   },
   {
-    shipName: 'Calypso',
+    name: 'Calypso',
     mmsi: 305691000,
     type: '10000t 2x450t 16kn',
     owner: 'Beluga',
@@ -120,7 +120,7 @@ const _ships = [
     updated: 'mock',
   },
   {
-    shipName: 'Amoenitas',
+    name: 'Amoenitas',
     mmsi: 305621000,
     type: '10000t 2x450t 16kn',
     owner: 'Beluga',
@@ -129,7 +129,7 @@ const _ships = [
     updated: 'mock',
   },
   {
-    shipName: 'Imke',
+    name: 'Imke',
     mmsi: 229127000,
     type: '10000t 2x450t 16kn',
     owner: 'Beluga',
@@ -138,7 +138,7 @@ const _ships = [
     updated: 'mock',
   },
   {
-    shipName: 'Anna',
+    name: 'Anna',
     mmsi: 305544000,
     type: '10000t 2x450t 16kn',
     owner: 'Beluga',
@@ -147,7 +147,7 @@ const _ships = [
     updated: 'mock',
   },
   {
-    shipName: 'Hilke',
+    name: 'Hilke',
     mmsi: 305533000,
     type: '10000t 2x450t 16kn',
     owner: 'Beluga',
@@ -156,7 +156,7 @@ const _ships = [
     updated: 'mock',
   },
   {
-    shipName: 'Caroline',
+    name: 'Caroline',
     mmsi: 305480000,
     type: '10000t 2x450t 16kn',
     owner: 'UHL',
@@ -165,7 +165,7 @@ const _ships = [
     updated: 'mock',
   },
   {
-    shipName: 'Klara',
+    name: 'Klara',
     mmsi: 255805875,
     type: '19000t 2x400t 17kn',
     owner: 'UHL',
@@ -174,7 +174,7 @@ const _ships = [
     updated: 'mock',
   },
   {
-    shipName: 'Lisa',
+    name: 'Lisa',
     mmsi: 255805785,
     type: '19000t 2x400t 17kn',
     owner: 'UHL',
@@ -183,7 +183,7 @@ const _ships = [
     updated: 'mock',
   },
   {
-    shipName: 'Hanna',
+    name: 'Hanna',
     mmsi: 255805770,
     type: '19000t 2x400t 17kn',
     owner: 'UHL',
@@ -192,7 +192,7 @@ const _ships = [
     updated: 'mock',
   },
   {
-    shipName: 'Lone',
+    name: 'Lone',
     mmsi: 305983000,
     type: '12500t 2x1000t 20kn',
     owner: 'UHL',
@@ -201,7 +201,7 @@ const _ships = [
     updated: 'mock',
   },
   {
-    shipName: 'Swenja',
+    name: 'Swenja',
     mmsi: 211577000,
     type: '12500t 2x1000t 20kn',
     owner: 'UHL',

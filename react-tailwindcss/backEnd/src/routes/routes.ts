@@ -1,5 +1,5 @@
 import express, { Request, Response } from 'express';
-import { Ship } from '../models/ships';
+import Ship from '../models/ships';
 
 const router = express.Router();
 
@@ -11,7 +11,7 @@ router.get('/', [], async (req: Request, res: Response) => {
 router.post('/', async (req: Request, res: Response) => {
   const { shipName, mmsi, type, owner, position } = req.body;
 
-  const ship = Ship.build({ shipName, mmsi, type, owner, position });
+  // const ship = Ship.build({ shipName, mmsi, type, owner, position });
   await ship.save();
   return res.status(201).send(ship);
 });
