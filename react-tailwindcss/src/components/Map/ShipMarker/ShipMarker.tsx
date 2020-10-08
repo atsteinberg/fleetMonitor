@@ -73,7 +73,6 @@ export const ShipMarker: React.FC<ShipMarkerProps> = ({
       setInfoOpen(false);
     }
   };
-  console.log(ship);
   const iconPath =
     ship.owner === 'BBC'
       ? 'assets/bbcicon.png'

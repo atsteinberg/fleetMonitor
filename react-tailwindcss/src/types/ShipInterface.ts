@@ -6,7 +6,20 @@ export interface Ship {
   lat: number;
   lng: number;
   updated: boolean | string | number;
-  history?: ShipHistory;
+  history?: IndividualHistory;
+}
+
+interface IndividualPointInHistory {
+  time: number;
+  coordinates: {
+    lat: number;
+    lng: number;
+  };
+}
+
+interface IndividualHistory {
+  previousLocations: IndividualPointInHistory[];
+  futureLocations: IndividualPointInHistory[];
 }
 
 export interface PointInHistory {

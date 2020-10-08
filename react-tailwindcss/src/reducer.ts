@@ -1,5 +1,6 @@
+import { extractHistory } from './components/Map/MapComponent/helper';
 import { ShipsState, UpdateAction } from './types/redux';
-import { Ship } from './types/ShipInterface';
+import { Ship, ShipHistory } from './types/ShipInterface';
 
 const initialShips: Ship[] = [
   {
@@ -9,7 +10,26 @@ const initialShips: Ship[] = [
     owner: 'UHL',
     lat: 52.44043,
     lng: 13.371147,
-    updated: 'mock',
+    updated: true,
+    history: {
+      previousLocations: [
+        {
+          time: Date.now(),
+          coordinates: {
+            lat: 52.44043,
+            lng: 13.371147,
+          },
+        },
+        {
+          time: Date.now() - 20000,
+          coordinates: {
+            lat: 50,
+            lng: 10,
+          },
+        },
+      ],
+      futureLocations: [],
+    },
   },
   {
     shipName: 'Anne_Sofie',
@@ -18,7 +38,19 @@ const initialShips: Ship[] = [
     owner: 'SAL',
     lat: 52.44043,
     lng: 13.371147,
-    updated: 'mock',
+    updated: true,
+    history: {
+      previousLocations: [
+        {
+          time: Date.now(),
+          coordinates: {
+            lat: 52.44043,
+            lng: 13.371147,
+          },
+        },
+      ],
+      futureLocations: [],
+    },
   },
   {
     shipName: 'Regine',
@@ -27,7 +59,19 @@ const initialShips: Ship[] = [
     owner: 'SAL',
     lat: 51.497654,
     lng: -0.12301,
-    updated: 'mock',
+    updated: true,
+    history: {
+      previousLocations: [
+        {
+          time: Date.now(),
+          coordinates: {
+            lat: 51.497654,
+            lng: -0.12301,
+          },
+        },
+      ],
+      futureLocations: [],
+    },
   },
   {
     shipName: 'Trina',
@@ -36,7 +80,19 @@ const initialShips: Ship[] = [
     owner: 'SAL',
     lat: 41.377964,
     lng: 2.19258,
-    updated: 'mock',
+    updated: true,
+    history: {
+      previousLocations: [
+        {
+          time: Date.now(),
+          coordinates: {
+            lat: 41.377964,
+            lng: 2.19258,
+          },
+        },
+      ],
+      futureLocations: [],
+    },
   },
   {
     shipName: 'Frauke',
@@ -45,7 +101,19 @@ const initialShips: Ship[] = [
     owner: 'UHL',
     lat: 54.427599,
     lng: 3.975018,
-    updated: 'mock',
+    updated: true,
+    history: {
+      previousLocations: [
+        {
+          time: Date.now(),
+          coordinates: {
+            lat: 54.427599,
+            lng: 3.975018,
+          },
+        },
+      ],
+      futureLocations: [],
+    },
   },
   {
     shipName: 'Maria',
@@ -54,7 +122,19 @@ const initialShips: Ship[] = [
     owner: 'BBC',
     lat: 54.57599,
     lng: 3.975018,
-    updated: 'mock',
+    updated: true,
+    history: {
+      previousLocations: [
+        {
+          time: Date.now(),
+          coordinates: {
+            lat: 54.57599,
+            lng: 3.975018,
+          },
+        },
+      ],
+      futureLocations: [],
+    },
   },
   {
     shipName: 'Annette',
@@ -63,7 +143,19 @@ const initialShips: Ship[] = [
     owner: 'BBC',
     lat: 54.6599,
     lng: 3.975018,
-    updated: 'mock',
+    updated: true,
+    history: {
+      previousLocations: [
+        {
+          time: Date.now(),
+          coordinates: {
+            lat: 54.6599,
+            lng: 3.975018,
+          },
+        },
+      ],
+      futureLocations: [],
+    },
   },
   {
     shipName: 'Wiebke',
@@ -71,8 +163,20 @@ const initialShips: Ship[] = [
     type: '9300t 2x320t 20kn',
     owner: 'BBC',
     lat: 54.769,
-    lng: 3.975018,
-    updated: 'mock',
+    lng: 3.97501,
+    updated: true,
+    history: {
+      previousLocations: [
+        {
+          time: Date.now(),
+          coordinates: {
+            lat: 54.769,
+            lng: 3.975018,
+          },
+        },
+      ],
+      futureLocations: [],
+    },
   },
   {
     shipName: 'Paula',
@@ -80,8 +184,20 @@ const initialShips: Ship[] = [
     type: '9300t 2x320t 20kn',
     owner: 'BBC',
     lat: 54.899,
-    lng: 3.975018,
-    updated: 'mock',
+    lng: 3.97501,
+    updated: true,
+    history: {
+      previousLocations: [
+        {
+          time: Date.now(),
+          coordinates: {
+            lat: 54.899,
+            lng: 3.975018,
+          },
+        },
+      ],
+      futureLocations: [],
+    },
   },
   {
     shipName: 'Annegret',
@@ -90,7 +206,19 @@ const initialShips: Ship[] = [
     owner: 'BBC',
     lat: 54.927599,
     lng: 3.975018,
-    updated: 'mock',
+    updated: true,
+    history: {
+      previousLocations: [
+        {
+          time: Date.now(),
+          coordinates: {
+            lat: 54.927599,
+            lng: 3.975018,
+          },
+        },
+      ],
+      futureLocations: [],
+    },
   },
   {
     shipName: 'Grietje',
@@ -99,7 +227,19 @@ const initialShips: Ship[] = [
     owner: 'BBC',
     lat: 54.137599,
     lng: 3.975018,
-    updated: 'mock',
+    updated: true,
+    history: {
+      previousLocations: [
+        {
+          time: Date.now(),
+          coordinates: {
+            lat: 54.137599,
+            lng: 3.975018,
+          },
+        },
+      ],
+      futureLocations: [],
+    },
   },
   {
     shipName: 'Annemieke',
@@ -108,7 +248,19 @@ const initialShips: Ship[] = [
     owner: 'Beluga',
     lat: 54.247599,
     lng: 3.975018,
-    updated: 'mock',
+    updated: true,
+    history: {
+      previousLocations: [
+        {
+          time: Date.now(),
+          coordinates: {
+            lat: 54.247599,
+            lng: 3.975018,
+          },
+        },
+      ],
+      futureLocations: [],
+    },
   },
   {
     shipName: 'Calypso',
@@ -117,7 +269,19 @@ const initialShips: Ship[] = [
     owner: 'Beluga',
     lat: 54.357599,
     lng: 3.975018,
-    updated: 'mock',
+    updated: true,
+    history: {
+      previousLocations: [
+        {
+          time: Date.now(),
+          coordinates: {
+            lat: 54.357599,
+            lng: 3.975018,
+          },
+        },
+      ],
+      futureLocations: [],
+    },
   },
   {
     shipName: 'Amoenitas',
@@ -126,7 +290,19 @@ const initialShips: Ship[] = [
     owner: 'Beluga',
     lat: 54.467599,
     lng: 3.975018,
-    updated: 'mock',
+    updated: true,
+    history: {
+      previousLocations: [
+        {
+          time: Date.now(),
+          coordinates: {
+            lat: 54.467599,
+            lng: 3.975018,
+          },
+        },
+      ],
+      futureLocations: [],
+    },
   },
   {
     shipName: 'Imke',
@@ -135,7 +311,19 @@ const initialShips: Ship[] = [
     owner: 'Beluga',
     lat: 54.477599,
     lng: 3.975018,
-    updated: 'mock',
+    updated: true,
+    history: {
+      previousLocations: [
+        {
+          time: Date.now(),
+          coordinates: {
+            lat: 54.477599,
+            lng: 3.975018,
+          },
+        },
+      ],
+      futureLocations: [],
+    },
   },
   {
     shipName: 'Anna',
@@ -144,7 +332,19 @@ const initialShips: Ship[] = [
     owner: 'Beluga',
     lat: 54.487599,
     lng: 3.975018,
-    updated: 'mock',
+    updated: true,
+    history: {
+      previousLocations: [
+        {
+          time: Date.now(),
+          coordinates: {
+            lat: 54.487599,
+            lng: 3.975018,
+          },
+        },
+      ],
+      futureLocations: [],
+    },
   },
   {
     shipName: 'Hilke',
@@ -153,7 +353,19 @@ const initialShips: Ship[] = [
     owner: 'Beluga',
     lat: 54.497599,
     lng: 3.975018,
-    updated: 'mock',
+    updated: true,
+    history: {
+      previousLocations: [
+        {
+          time: Date.now(),
+          coordinates: {
+            lat: 54.497599,
+            lng: 3.975018,
+          },
+        },
+      ],
+      futureLocations: [],
+    },
   },
   {
     shipName: 'Caroline',
@@ -162,7 +374,19 @@ const initialShips: Ship[] = [
     owner: 'UHL',
     lat: 54.427599,
     lng: 3.965018,
-    updated: 'mock',
+    updated: true,
+    history: {
+      previousLocations: [
+        {
+          time: Date.now(),
+          coordinates: {
+            lat: 54.427599,
+            lng: 3.965018,
+          },
+        },
+      ],
+      futureLocations: [],
+    },
   },
   {
     shipName: 'Klara',
@@ -171,7 +395,19 @@ const initialShips: Ship[] = [
     owner: 'UHL',
     lat: 54.427599,
     lng: 3.955018,
-    updated: 'mock',
+    updated: true,
+    history: {
+      previousLocations: [
+        {
+          time: Date.now(),
+          coordinates: {
+            lat: 54.427599,
+            lng: 3.955018,
+          },
+        },
+      ],
+      futureLocations: [],
+    },
   },
   {
     shipName: 'Lisa',
@@ -180,7 +416,19 @@ const initialShips: Ship[] = [
     owner: 'UHL',
     lat: 54.427599,
     lng: 3.945018,
-    updated: 'mock',
+    updated: true,
+    history: {
+      previousLocations: [
+        {
+          time: Date.now(),
+          coordinates: {
+            lat: 54.427599,
+            lng: 3.945018,
+          },
+        },
+      ],
+      futureLocations: [],
+    },
   },
   {
     shipName: 'Hanna',
@@ -189,7 +437,19 @@ const initialShips: Ship[] = [
     owner: 'UHL',
     lat: 54.427599,
     lng: 3.935018,
-    updated: 'mock',
+    updated: true,
+    history: {
+      previousLocations: [
+        {
+          time: Date.now(),
+          coordinates: {
+            lat: 54.427599,
+            lng: 3.935018,
+          },
+        },
+      ],
+      futureLocations: [],
+    },
   },
   {
     shipName: 'Lone',
@@ -198,7 +458,19 @@ const initialShips: Ship[] = [
     owner: 'UHL',
     lat: 54.427599,
     lng: 3.925018,
-    updated: 'mock',
+    updated: true,
+    history: {
+      previousLocations: [
+        {
+          time: Date.now(),
+          coordinates: {
+            lat: 54.427599,
+            lng: 3.925018,
+          },
+        },
+      ],
+      futureLocations: [],
+    },
   },
   {
     shipName: 'Swenja',
@@ -207,14 +479,29 @@ const initialShips: Ship[] = [
     owner: 'UHL',
     lat: 54.427599,
     lng: 3.175018,
-    updated: 'mock',
+    updated: true,
+    history: {
+      previousLocations: [
+        {
+          time: Date.now(),
+          coordinates: {
+            lat: 54.427599,
+            lng: 3.175018,
+          },
+        },
+      ],
+      futureLocations: [],
+    },
   },
 ];
 
 export default function (
-  state: ShipsState = { ships: initialShips },
+  state: ShipsState = {
+    ships: initialShips,
+    history: extractHistory(initialShips),
+  },
   action: UpdateAction,
-): { ships: Ship[] } {
+): { ships: Ship[]; history: ShipHistory } {
   let updatedShips;
 
   switch (action.type) {
@@ -224,10 +511,9 @@ export default function (
         ...updatedShips[action.index],
         lat: action.lat,
         lng: action.lng,
-        updated: action.updated,
       };
 
-      return { ships: updatedShips };
+      return { ships: updatedShips, history: extractHistory(updatedShips) };
 
     default:
       return state;

@@ -1,10 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { GoogleMap, LoadScript } from '@react-google-maps/api';
-import { PointInHistory, Ship } from '../../../types/ShipInterface';
+import {
+  PointInHistory,
+  Ship,
+  ShipHistory,
+} from '../../../types/ShipInterface';
 import { Row } from 'react-table';
 import { ShipMapLayer } from '../ShipMapLayer/ShipMapLayer';
 import { TimeSlider } from '../TimeSlider/TimeSlider';
 import { extractHistory } from './helper';
+import { useSelector } from 'react-redux';
+import { ShipsState } from '../../../types/redux';
 
 const containerStyle = {
   width: '100%',
@@ -21,7 +27,7 @@ interface MapComponentProps {
   center: Center;
 }
 
-// const history = {
+// let history: ShipHistory = {
 //   previousStates: [
 //     {
 //       time: Date.now() - 300000000,
@@ -124,11 +130,14 @@ export const MapComponent: React.FC<MapComponentProps> = ({
   rows,
   center,
 }: MapComponentProps) => {
-  const [history, setHistory] = useState(extractHistory(rows));
-  const [map, setMap] = useState<google.maps.Map | null>(null);
-  const [pointInHistory, setPointInHistory] = useState<PointInHistory>(
-    history.previousStates[history.previousStates.length - 1],
+  // const [history, setHistory] = useState(extractHistory(rows));
+
+  const history: ShipHistory = useSelector(
+    (state: ShipsState) => state.history,
   );
+
+  const [map, setMap] = useState<google.maps.Map | null>(null);
+  const [pointInHistory, setPointInHistory] = useState<PointInHistory>();
 
   const loadHandler = (loadedMap: google.maps.Map) => {
     setMap(loadedMap);
@@ -149,7 +158,7 @@ export const MapComponent: React.FC<MapComponentProps> = ({
             onLoad={loadHandler}
             onUnmount={unmountHandler}
           >
-            <ShipMapLayer map={map} ships={pointInHistory.ships} />
+            <ShipMapLayer map={map} ships={pointInHistory?.ships || []} />
           </GoogleMap>
         </LoadScript>
       </div>

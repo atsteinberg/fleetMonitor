@@ -1,16 +1,29 @@
 import { Row } from 'react-table';
-import { Ship, ShipHistory } from '../../../types/ShipInterface';
+import {
+  PointInHistory,
+  Ship,
+  ShipHistory,
+} from '../../../types/ShipInterface';
 
-export const extractHistory = (rows: Row<Ship>[]): ShipHistory => {
-  const history: ShipHistory = {
-    previousStates: [],
-    futureStates: [],
+interface HistoryObj {
+  [time: string]: PointInHistory;
+}
+
+interface History {
+  previousStates: HistoryObj;
+  futureStates: HistoryObj;
+}
+
+export const extractHistory = (ships: Ship[]): ShipHistory => {
+  const history: History = {
+    previousStates: {},
+    futureStates: {},
   };
-  rows.forEach((ship) => {
-    const pastLocations = ship.original.history?.previousStates || [];
-    const futureLocations = ship.original.history?.futureStates || [];
+  ships.forEach((ship) => {
+    const pastLocations = ship.history?.previousLocations || [];
+    const futureLocations = ship.history?.futureLocations || [];
     pastLocations.forEach((datedLocation) => {
-      if (!history.previousStates[datedLocation.time]) {
+      if (!history.previousStates[datedLocation.time.toString()]) {
         history.previousStates[datedLocation.time] = {
           time: datedLocation.time,
           ships: [],
@@ -18,7 +31,7 @@ export const extractHistory = (rows: Row<Ship>[]): ShipHistory => {
       }
       history.previousStates[datedLocation.time].ships = [
         ...history.previousStates[datedLocation.time].ships,
-        ship.original,
+        ship,
       ];
       futureLocations.forEach((datedLocation) => {
         if (!history.futureStates[datedLocation.time]) {
@@ -29,12 +42,20 @@ export const extractHistory = (rows: Row<Ship>[]): ShipHistory => {
         }
         history.futureStates[datedLocation.time].ships = [
           ...history.futureStates[datedLocation.time].ships,
-          ship.original,
+          ship,
         ];
       });
     });
   });
-  return history;
+  const previousStateTimes = Object.keys(history.previousStates).sort();
+  const futureStateTimes = Object.keys(history.futureStates).sort();
+  const previousStates = previousStateTimes.map(
+    (time) => history.previousStates[time],
+  );
+  const futureStates = futureStateTimes.map(
+    (time) => history.futureStates[time],
+  );
+  return { previousStates, futureStates };
 };
 
 // shipData.forEach((ship) => {

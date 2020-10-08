@@ -1,4 +1,4 @@
-import { Ship } from './ShipInterface';
+import { Ship, ShipHistory } from './ShipInterface';
 
 export const POSITION_UPDATE = 'POSITION_UPDATE';
 
@@ -6,6 +6,7 @@ export type Ships = Ship[];
 
 export interface ShipsState {
   ships: Ship[];
+  history: ShipHistory;
 }
 
 export interface UpdateAction {
