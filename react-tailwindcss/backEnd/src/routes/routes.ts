@@ -1,19 +1,20 @@
-import express, { Request, Response } from 'express';
-import { Ship } from '../models/ships';
+import express from 'express';
+
+import { getShips, postShip } from '../controller/ships';
+import { getPorts, postPort } from '../controller/ports';
 
 const router = express.Router();
 
-router.get('/', [], async (req: Request, res: Response) => {
-  const ship = await Ship.find({});
-  return res.status(200).send(ship);
-});
+//Ships
 
-router.post('/', async (req: Request, res: Response) => {
-  const { shipName, mmsi, type, owner, position } = req.body;
+router.get('/ships', getShips);
 
-  const ship = Ship.build({ shipName, mmsi, type, owner, position });
-  await ship.save();
-  return res.status(201).send(ship);
-});
+router.post('/ships', postShip);
+
+//Ports
+
+router.get('/ports', getPorts);
+
+router.post('/ports', postPort);
 
 export { router as routerSpy };
