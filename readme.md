@@ -1,6 +1,6 @@
 # FleetSpy
 
-<img src="/Users/dev/Documents/projects/codeworks/senior/legacy/fleetMonitor/logo.png" alt="logo" style="zoom:50%;" />
+<img src="./logo.png" alt="logo" style="zoom:50%;" />
 
 Past, present, and projected vessel positions. Powered by [marinetraffic.com](https://www.marinetraffic.com/).
 
