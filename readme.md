@@ -21,6 +21,7 @@ REACT_APP_API_MAPS=<YOUR_API_KEY_GOES_HERE>
 ```
 
 4. cd to react-tailwindcss foder and <code>npm start</code>
+5. enjoy
 
 ## Built with
 
