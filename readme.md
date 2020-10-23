@@ -24,18 +24,16 @@ REACT_APP_API_MAPS=<YOUR_API_KEY_GOES_HERE>
 
 ## Built with
 
-* [React](https://reactjs.org)
-* [Redux](https://redux.js.org)
-* [TypeScript](https://www.typescriptlang.org)
-* [tailwindcss](https://tailwindcss.com)
-* [MarineTraffic API](https://www.marinetraffic.com/en/ais-api-services) 
-* [Google Maps API](https://developers.google.com/maps/documentation)
-* [Blood, Sweat & Tears](https://bloodsweatandtears.com/)
+- [React](https://reactjs.org)
+- [Redux](https://redux.js.org)
+- [TypeScript](https://www.typescriptlang.org)
+- [tailwindcss](https://tailwindcss.com)
+- [MarineTraffic API](https://www.marinetraffic.com/en/ais-api-services)
+- [Google Maps API](https://developers.google.com/maps/documentation)
+- [Blood, Sweat & Tears](https://bloodsweatandtears.com/)
 
 ## Developers
 
-* Wilke Briese – project developer: [github](https://github.com/wbriese) -- [linkedin](https://www.linkedin.com/in/wilke-briese-b4b16755/)
-* Edu Pinto – backend and design lead: [github](https://github.com/pintoedo)
-* Alex Steinberg – tech lead: [github](https://github.com/atsteinberg) – [linkedin](https://www.linkedin.com/in/alexander-steinberg-7b7299194) – [web](atsteinberg.github.io)
-
- 
+- Wilke Briese – project developer: [github](https://github.com/wbriese) -- [linkedin](https://www.linkedin.com/in/wilke-briese-b4b16755/)
+- Edu Pinto – backend and design lead: [github](https://github.com/pintoedo)
+- Alex Steinberg – tech lead: [github](https://github.com/atsteinberg) – [linkedin](https://www.linkedin.com/in/alexander-steinberg-7b7299194) – [web](atsteinberg.github.io)
