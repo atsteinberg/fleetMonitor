@@ -39,4 +39,4 @@ REACT_APP_API_MAPS=<YOUR_API_KEY_GOES_HERE>
 
 - Wilke Briese – project developer: [github](https://github.com/wbriese) – [linkedin](https://www.linkedin.com/in/wilke-briese-b4b16755/)
 - Edu Pinto – backend and design lead: [github](https://github.com/pintoedo)
-- Alex Steinberg – tech lead: [github](https://github.com/atsteinberg) – [linkedin](https://www.linkedin.com/in/alexander-steinberg-7b7299194) – [web](https://atsteinberg.github.io)
+- Alex Steinberg – tech lead: [github](https://github.com/atsteinberg) – [linkedin](www.linkedin.com/in/atsteinberg) – [web](https://atsteinberg.github.io)
