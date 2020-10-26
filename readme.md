@@ -1,6 +1,6 @@
 # FleetSpy
 
-<img src="./logo.png" alt="logo" style="zoom:50%;" />
+<img src="./logobanner.png" alt="logo" style="zoom:50%;" />
 
 Past, present, and projected vessel positions. Powered by [marinetraffic.com](https://www.marinetraffic.com/).
 
